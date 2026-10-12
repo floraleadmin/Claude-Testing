@@ -302,3 +302,53 @@ test('without a Dutch voice nothing is read aloud and listening tasks are left o
   await expect(page.getByText(/Keine niederländische Stimme gefunden/)).toBeVisible();
   await expect(page.getByText(/Windows: Einstellungen/)).toBeVisible();
 });
+
+test('two open tabs never overwrite each other’s progress', async ({ context }) => {
+  test.setTimeout(120_000);
+  const a = await context.newPage();
+  await a.goto('/?e2e');
+  await a.getByRole('button', { name: 'Ganz von vorn beginnen' }).click();
+  const b = await context.newPage();
+  await b.goto('/?e2e');
+  await expect(b.getByRole('button', { name: /Hallo!, Lektion 1 von \d+$/ })).toBeVisible();
+  // Tab A finishes lesson 1; tab B, still open, picks it up without a reload.
+  await a.getByRole('button', { name: /Hallo!, Lektion 1 von/ }).click();
+  await a.getByRole('button', { name: /Starten/ }).click();
+  await playSession(a);
+  await a.getByRole('button', { name: 'Weiter' }).click();
+  await expect(b.getByRole('button', { name: /Hallo!, Lektion 1 von \d+, erledigt/ })).toBeVisible();
+  // Tab B finishes lesson 2; tab A keeps both after a reload.
+  await b.getByRole('button', { name: /Hallo!, Lektion 2 von \d+$/ }).click();
+  await b.getByRole('button', { name: /Starten/ }).click();
+  await playSession(b);
+  await b.getByRole('button', { name: 'Weiter' }).click();
+  await a.reload();
+  await expect(a.getByRole('button', { name: /Hallo!, Lektion 1 von \d+, erledigt/ })).toBeVisible();
+  await expect(a.getByRole('button', { name: /Hallo!, Lektion 2 von \d+, erledigt/ })).toBeVisible();
+});
+
+test('progress can be saved to a file, deleted and restored', async ({ page }) => {
+  test.setTimeout(120_000);
+  await page.goto('/?e2e');
+  await page.getByRole('button', { name: 'Ganz von vorn beginnen' }).click();
+  await page.getByRole('button', { name: /Hallo!, Lektion 1 von/ }).click();
+  await page.getByRole('button', { name: /Starten/ }).click();
+  await playSession(page);
+  await page.getByRole('button', { name: 'Weiter' }).click();
+  await page.getByRole('button', { name: /^(Einstellungen|Optionen)$/ }).first().click();
+  const [download] = await Promise.all([page.waitForEvent('download'), page.getByRole('button', { name: 'Als Datei sichern' }).click()]);
+  const file = await download.path();
+  await page.getByRole('button', { name: 'Fortschritt löschen' }).click();
+  await page.getByRole('dialog').getByRole('button', { name: /löschen/i }).click();
+  await page.getByRole('button', { name: /^(Lernen)$/ }).first().click();
+  await expect(page.getByRole('button', { name: /Hallo!, Lektion 1 von \d+$/ })).toBeVisible();
+  await page.getByRole('button', { name: /^(Einstellungen|Optionen)$/ }).first().click();
+  await page.locator('input[type=file]').setInputFiles(file);
+  await expect(page.getByRole('status')).toHaveText('Fortschritt wiederhergestellt.');
+  // A file that is not a backup is refused and changes nothing.
+  await page.getByLabel('Oder Sicherungstext hier einfügen:').fill('{"hallo": 1}');
+  await page.getByRole('button', { name: 'Text wiederherstellen' }).click();
+  await expect(page.getByRole('status')).toHaveText('Das ist keine gültige Sicherung von Taalfiets.');
+  await page.getByRole('button', { name: /^(Lernen)$/ }).first().click();
+  await expect(page.getByRole('button', { name: /Hallo!, Lektion 1 von \d+, erledigt/ })).toBeVisible();
+});

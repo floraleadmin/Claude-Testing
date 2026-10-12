@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { addDays, applySession, currentStreak, dayNumber, localDay, newProgress, strength, type SessionResult } from '../src/lib/progress';
+import { addDays, applySession, compact, currentStreak, dayNumber, isProgress, localDay, newProgress, strength, type SessionResult } from '../src/lib/progress';
 
 const day = (d: string) => new Date(d + 'T10:00:00');
 const lesson = (over: Partial<SessionResult> = {}): SessionResult => ({
@@ -72,5 +72,14 @@ describe('applySession', () => {
   it('never stores match exercises as mistakes', () => {
     const p = applySession(newProgress(), lesson({ outcomes: [{ key: 'm:a,b,c', wordIds: [], firstTry: false }] }), day('2026-10-12'));
     expect(p.mistakes).toEqual([]);
+  });
+});
+
+describe('isProgress', () => {
+  it('accepts saved progress and refuses anything else', () => {
+    const p = newProgress();
+    expect(isProgress(p)).toBe(true);
+    expect(isProgress(JSON.parse(JSON.stringify(compact(p))))).toBe(true);
+    for (const bad of [null, 1, 'x', [], {}, { hallo: 1 }, { ...p, v: 2 }, { ...p, done: [] }, { ...p, createdAt: '2026' }]) expect(isProgress(bad)).toBe(false);
   });
 });

@@ -1,7 +1,7 @@
 // App-wide state: the learner's progress, persisted locally and in the cloud.
 import { createContext, useCallback, useContext, useEffect, useMemo, useReducer, useRef, type ReactNode } from 'react';
 import { acceptAnswer, applySession, migrate, newProgress, type Progress, type SessionResult, type Settings } from './lib/progress';
-import { initCloud, loadLocal, saveLocal, scheduleCloud } from './lib/storage';
+import { initCloud, loadLocal, onOtherTab, saveLocal, scheduleCloud } from './lib/storage';
 import { newBadges } from './lib/unlock';
 import { speak } from './lib/speech';
 import { sounds } from './lib/sound';
@@ -56,6 +56,15 @@ export function AppProvider({ children }: { children: ReactNode }) {
       (p) => dispatch({ type: 'replace', p: migrate(p) }),
     );
   }, []);
+
+  // A second tab must not overwrite what this one saved, so take its newer copy.
+  useEffect(
+    () =>
+      onOtherTab((p) => {
+        if (p.updatedAt > ref.current.updatedAt) dispatch({ type: 'replace', p });
+      }),
+    [],
+  );
 
   useEffect(() => {
     if (first.current) {

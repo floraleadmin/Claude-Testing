@@ -1,6 +1,6 @@
 // Settings: goal, audio, speaking, hearts, theme, backup and reset.
 import { useEffect, useState } from 'react';
-import { DEFAULT_SETTINGS, migrate } from '../lib/progress';
+import { DEFAULT_SETTINGS, isProgress, migrate } from '../lib/progress';
 import { dutchVoices, inArtifactFrame, onVoicesChanged, recognitionSupported, ttsSupported } from '../lib/speech';
 import { isCloud } from '../lib/storage';
 import { Dialog, Switch, useDutchAudio, VoiceHelpList } from '../components/common';
@@ -62,8 +62,9 @@ export function Settings() {
   };
   const restore = (text: string) => {
     try {
-      const p = migrate(JSON.parse(text));
-      if (!p.createdAt) throw new Error('no progress');
+      const raw: unknown = JSON.parse(text);
+      if (!isProgress(raw)) throw new Error('no progress');
+      const p = migrate(raw);
       dispatch({ type: 'replace', p: { ...p, updatedAt: Date.now() } });
       setMessage('Fortschritt wiederhergestellt.');
       setImportText('');

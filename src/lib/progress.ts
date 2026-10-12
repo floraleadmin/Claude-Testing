@@ -81,6 +81,14 @@ export function newProgress(now = Date.now()): Progress {
 }
 
 /** Fills in fields missing from older saves. */
+/** True for something that was saved by Taalfiets (a backup file, a stored copy). */
+export function isProgress(raw: unknown): boolean {
+  if (!raw || typeof raw !== 'object' || Array.isArray(raw)) return false;
+  const p = raw as Record<string, unknown>;
+  const obj = (x: unknown) => !!x && typeof x === 'object' && !Array.isArray(x);
+  return p.v === 1 && typeof p.createdAt === 'number' && typeof p.xp === 'number' && obj(p.done) && obj(p.words) && obj(p.settings);
+}
+
 export function migrate(raw: unknown): Progress {
   const base = newProgress();
   if (!raw || typeof raw !== 'object') return base;

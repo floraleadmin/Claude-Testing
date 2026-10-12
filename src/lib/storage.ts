@@ -1,13 +1,14 @@
 // Saves progress in localStorage and, inside a claude.ai artifact, in the
 // viewer's private db document so it follows them across devices.
-import { compact, migrate, type Progress } from './progress';
+import { compact, isProgress, migrate, type Progress } from './progress';
 
 const KEY = 'taalfiets:v1';
 
 export function loadLocal(): Progress | null {
   try {
     const raw = localStorage.getItem(KEY);
-    return raw ? migrate(JSON.parse(raw)) : null;
+    const data: unknown = raw ? JSON.parse(raw) : null;
+    return isProgress(data) ? migrate(data) : null;
   } catch {
     return null;
   }
@@ -19,6 +20,22 @@ export function saveLocal(p: Progress): void {
   } catch {
     // Storage can be full or blocked (private mode); the cloud copy still works.
   }
+}
+
+/** Calls `fn` when another tab of the app saves progress. */
+export function onOtherTab(fn: (p: Progress) => void): () => void {
+  if (typeof window === 'undefined') return () => {};
+  const h = (e: StorageEvent) => {
+    if (e.key !== KEY || !e.newValue) return;
+    try {
+      const data: unknown = JSON.parse(e.newValue);
+      if (isProgress(data)) fn(migrate(data));
+    } catch {
+      // A broken copy from another tab is ignored; this tab keeps its own.
+    }
+  };
+  window.addEventListener('storage', h);
+  return () => window.removeEventListener('storage', h);
 }
 
 interface DocRef {
@@ -57,7 +74,7 @@ export async function initCloud(getLocal: () => Progress, adopt: (p: Progress) =
     remote = db.doc(`data/users/${id}/progress`);
     const snap = await remote.get();
     const local = getLocal();
-    if (snap.exists) {
+    if (snap.exists && isProgress(snap.data())) {
       const cloud = migrate(snap.data());
       if (cloud.updatedAt > local.updatedAt) adopt(cloud);
       else if (local.updatedAt > cloud.updatedAt) scheduleCloud(local);
