@@ -225,7 +225,7 @@ export function Session({ spec, onClose, onRestart }: Props) {
               )}
               {!isListen && !canSkipSpeak && <span className="spacer" />}
               {ex.type !== 'match' && ex.type !== 'speak' && (
-                <button className="btn success lg footer-main" onClick={check} disabled={!response}>
+                <button className="btn lg footer-main" onClick={check} disabled={!response}>
                   Prüfen
                 </button>
               )}

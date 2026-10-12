@@ -8,7 +8,7 @@ async function currentExercise(page: Page): Promise<Ex | null> {
   return page.evaluate(() => (window as any).__taalfiets?.ex ?? null);
 }
 
-const label = (w: Ex) => (w.pos === 'noun' && !w.pluralOnly ? `${w.art} ${w.nl}` : w.pos === 'noun' ? `de ${w.nl}` : w.nl);
+const label = (w: Ex) => (w.pos === 'noun' && !w.pluralOnly ? `${w.bothArts ? 'de/het' : w.art} ${w.nl}` : w.pos === 'noun' ? `de ${w.nl}` : w.nl);
 const tokens = (s: string) =>
   s
     .replace(/[.,!?;:"„“”«»()¿¡…]/g, ' ')
@@ -93,16 +93,14 @@ test('first lesson: onboarding, all exercises, XP and the next lesson unlocks', 
   expect(errors).toEqual([]);
 });
 
-test('a whole chapter including story and chapter test; progress survives a reload', async ({ page }) => {
-  test.setTimeout(240_000);
-  await page.goto('/?e2e');
-  await page.getByRole('button', { name: 'Ganz von vorn beginnen' }).click();
+/** Plays every node of the chapter the learner is in: lessons, story and chapter test. */
+async function playChapter(page: Page, title: string): Promise<Set<string>> {
   const types = new Set<string>();
   for (let i = 0; i < 12; i++) {
     const node = page.locator('.node.current');
     if (!(await node.count())) break;
     const name = (await node.getAttribute('aria-label')) ?? '';
-    if (!name.startsWith('Hallo!')) break;
+    if (!name.startsWith(title)) break;
     await node.click();
     await page.locator('.popover .btn').click();
     if (name.includes('Geschichte')) {
@@ -126,6 +124,14 @@ test('a whole chapter including story and chapter test; progress survives a relo
     for (const t of await playSession(page)) types.add(t);
     await page.getByRole('button', { name: 'Weiter' }).click();
   }
+  return types;
+}
+
+test('a whole chapter including story and chapter test; progress survives a reload', async ({ page }) => {
+  test.setTimeout(240_000);
+  await page.goto('/?e2e');
+  await page.getByRole('button', { name: 'Ganz von vorn beginnen' }).click();
+  const types = await playChapter(page, 'Hallo!');
   await expect(page.getByRole('button', { name: /Hallo!, Kapiteltest, erledigt/ })).toBeVisible();
   for (const t of ['meaning', 'match', 'build', 'write', 'cloze']) expect(types, t).toContain(t);
   await page.reload();
@@ -180,5 +186,21 @@ test('main screens open without errors', async ({ page }) => {
   await page.getByRole('button', { name: /^(Lernen)$/ }).first().click();
   await page.getByRole('button', { name: /Grammatik und Wörter: Hallo!/ }).click();
   await expect(page.getByRole('heading', { name: 'Hallo!' })).toBeVisible();
+  expect(errors).toEqual([]);
+});
+
+test('placement test into section 5, then its first chapter', async ({ page }) => {
+  test.setTimeout(300_000);
+  const errors: string[] = [];
+  page.on('pageerror', (e) => errors.push(String(e)));
+  await page.goto('/?e2e');
+  await page.getByRole('button', { name: 'Ich kann schon etwas Niederländisch' }).click();
+  await page.getByRole('button', { name: /^Abschnitt 5:/ }).click();
+  await playSession(page);
+  await page.getByRole('button', { name: 'Weiter' }).click();
+  await expect(page.getByRole('button', { name: /Relativsätze, Lektion 1 von \d+$/ })).toBeVisible();
+  const types = await playChapter(page, 'Relativsätze');
+  await expect(page.getByRole('button', { name: /Relativsätze, Kapiteltest, erledigt/ })).toBeVisible();
+  expect(types.size).toBeGreaterThanOrEqual(5);
   expect(errors).toEqual([]);
 });

@@ -206,13 +206,6 @@ p {
   transform: translateY(4px);
   box-shadow: 0 0 0 var(--b-edge);
 }
-.btn:disabled {
-  --b-bg: var(--locked);
-  --b-fg: var(--on-locked);
-  --b-edge: var(--locked);
-  cursor: not-allowed;
-  box-shadow: none;
-}
 .btn.secondary {
   --b-bg: var(--surface);
   --b-fg: var(--delft);
@@ -242,6 +235,14 @@ p {
 }
 .btn.ghost:active {
   transform: none;
+}
+/* After the colour variants so a disabled button never looks active. */
+.btn:disabled {
+  --b-bg: var(--locked);
+  --b-fg: var(--on-locked);
+  --b-edge: var(--locked);
+  cursor: not-allowed;
+  box-shadow: none;
 }
 .btn.block {
   width: 100%;
@@ -1617,8 +1618,16 @@ select.input {
 }
 .quest .row {
   justify-content: space-between;
+  flex-wrap: nowrap;
+  align-items: baseline;
   font-weight: 600;
   font-size: 15px;
+}
+.quest .row > :first-child {
+  min-width: 0;
+}
+.quest .row > .num {
+  flex-shrink: 0;
 }
 
 @media (max-width: 480px) {
