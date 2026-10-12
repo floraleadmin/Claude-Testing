@@ -1,0 +1,40 @@
+{
+  "name": "taalfiets",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Niederländisch lernen für Deutschsprachige – Lernpfad, Übungen, Grammatik, Wiederholung.",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -p . && vite build",
+    "build:single": "tsc -p . && vite build --mode single && node scripts/make-artifact.mjs",
+    "preview": "vite preview",
+    "typecheck": "tsc -p .",
+    "test": "vitest run",
+    "check:content": "tsx scripts/check-content.ts",
+    "gen": "tsx scripts/gen-distractors.ts",
+    "e2e": "playwright test"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "lucide-react": "^1.55.0",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.56.1",
+    "@types/node": "^24.19.2",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.1.2",
+    "dictionary-de": "^3.0.0",
+    "dictionary-nl": "^2.0.0",
+    "jsdom": "^29.1.1",
+    "nspell": "^2.1.5",
+    "tsx": "^4.23.15",
+    "typescript": "^5.9.3",
+    "vite": "^8.3.4",
+    "vite-plugin-singlefile": "^2.3.3",
+    "vitest": "^5.0.4"
+  }
+}

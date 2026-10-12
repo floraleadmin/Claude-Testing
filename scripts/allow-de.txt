@@ -1,0 +1,23 @@
+# German words the Hunspell dictionary does not know but that are correct.
+# One per line; case-sensitive.
+geht's
+Sorry
+sorry
+Dutch
+Modalverben
+Schlafengehen
+Silbenende
+Possessivpronomen
+Pluralformen
+# Letter combinations in the pronunciation table and suffix lists
+ch
+oe
+eu
+uu
+äi
+öi
+sch
+be
+em
+el
+er

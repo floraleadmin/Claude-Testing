@@ -1,0 +1,200 @@
+{
+  "_about": "Taalfiets – dunkles Theme. Gleiche Rollen, eigene Werte. accent-strong ist hier nur die Kante der 3D-Tasten, nie Texthintergrund.",
+  "color": {
+    "bg": "#0e1520",
+    "surface": "#172131",
+    "surface-2": "#1f2b3e",
+    "border": "#2b3a52",
+    "border-input": "#7686a0",
+    "text": "#e9eef6",
+    "text-muted": "#a7b3c6",
+    "accent": "#f08a4b",
+    "accent-strong": "#c2410c",
+    "on-accent": "#1b0c03",
+    "delft": "#8fb3f5",
+    "delft-strong": "#5b86d6",
+    "on-delft": "#0b1730",
+    "success": "#6fdc94",
+    "success-bg": "#12321f",
+    "danger": "#ff8f86",
+    "danger-bg": "#3a1614",
+    "warning": "#f3c06b",
+    "warning-bg": "#3a2a0b",
+    "unit-1": "#c2410c",
+    "unit-2": "#2a5bb3",
+    "unit-3": "#0f6e66",
+    "unit-4": "#7e2a8f",
+    "unit-5": "#a3233f",
+    "on-unit": "#ffffff",
+    "locked": "#2b3a52",
+    "on-locked": "#a7b3c6"
+  },
+  "pairs": [
+    [
+      "text",
+      "bg"
+    ],
+    [
+      "text",
+      "surface"
+    ],
+    [
+      "text",
+      "surface-2"
+    ],
+    [
+      "text-muted",
+      "bg"
+    ],
+    [
+      "text-muted",
+      "surface"
+    ],
+    [
+      "text-muted",
+      "surface-2"
+    ],
+    [
+      "on-accent",
+      "accent"
+    ],
+    [
+      "accent",
+      "surface"
+    ],
+    [
+      "accent",
+      "bg"
+    ],
+    [
+      "on-delft",
+      "delft"
+    ],
+    [
+      "delft",
+      "surface"
+    ],
+    [
+      "success",
+      "success-bg"
+    ],
+    [
+      "success",
+      "surface"
+    ],
+    [
+      "danger",
+      "danger-bg"
+    ],
+    [
+      "danger",
+      "surface"
+    ],
+    [
+      "warning",
+      "warning-bg"
+    ],
+    [
+      "on-unit",
+      "unit-1"
+    ],
+    [
+      "on-unit",
+      "unit-2"
+    ],
+    [
+      "on-unit",
+      "unit-3"
+    ],
+    [
+      "on-unit",
+      "unit-4"
+    ],
+    [
+      "on-unit",
+      "unit-5"
+    ],
+    [
+      "on-locked",
+      "locked",
+      "ui"
+    ],
+    [
+      "border-input",
+      "surface",
+      "ui"
+    ],
+    [
+      "border-input",
+      "bg",
+      "ui"
+    ],
+    [
+      "accent",
+      "surface",
+      "ui"
+    ]
+  ],
+  "font": {
+    "display": "'Baloo 2', 'Trebuchet MS', system-ui, sans-serif",
+    "sans": "Lexend, 'Segoe UI', system-ui, -apple-system, Roboto, sans-serif"
+  },
+  "type": {
+    "xs": {
+      "size": 12,
+      "line": 16,
+      "weight": 600
+    },
+    "sm": {
+      "size": 14,
+      "line": 20,
+      "weight": 400
+    },
+    "base": {
+      "size": 16,
+      "line": 24,
+      "weight": 400
+    },
+    "lg": {
+      "size": 19,
+      "line": 28,
+      "weight": 600
+    },
+    "xl": {
+      "size": 24,
+      "line": 30,
+      "weight": 700
+    },
+    "display": {
+      "size": 32,
+      "line": 36,
+      "weight": 800
+    }
+  },
+  "space": [
+    0,
+    4,
+    8,
+    12,
+    16,
+    24,
+    32,
+    48,
+    64
+  ],
+  "radius": {
+    "sm": 8,
+    "md": 12,
+    "lg": 16,
+    "pill": 999
+  },
+  "shadow": {
+    "press": "0 4px 0 var(--press-color)",
+    "pop": "0 12px 32px rgba(16,24,40,.18)"
+  },
+  "motion": {
+    "fast": "120ms",
+    "base": "200ms",
+    "ease": "cubic-bezier(.2,.8,.2,1)"
+  }
+}

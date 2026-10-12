@@ -1,0 +1,346 @@
+{
+ "meneer": [
+  "meneers",
+  "meneeren",
+  "meneerren"
+ ],
+ "mevrouw": [
+  "mevrouws",
+  "mevrouwwen"
+ ],
+ "Duitser": [
+  "Duitseren",
+  "Duitserren",
+  "Duitseeren"
+ ],
+ "Nederlander": [
+  "Nederlanderen",
+  "Nederlanderren",
+  "Nederlandeeren"
+ ],
+ "vrouw": [
+  "vrouws",
+  "vrouwwen"
+ ],
+ "jongen": [
+  "jongenen",
+  "jongennen",
+  "jongeenen"
+ ],
+ "meisje": [
+  "meisjeen",
+  "meisje's"
+ ],
+ "kind": [
+  "kinden",
+  "kindden"
+ ],
+ "vriend": [
+  "vriends",
+  "vriendden"
+ ],
+ "vriendin": [
+  "vriendins",
+  "vriendinen",
+  "vriendiinen"
+ ],
+ "baby": [
+  "babys",
+  "babyen",
+  "babyyen"
+ ],
+ "mens": [
+  "menss",
+  "menssen",
+  "menzen"
+ ],
+ "buurman": [
+  "buurmanen",
+  "buurmaanen"
+ ],
+ "buurvrouw": [
+  "buurvrouws",
+  "buurvrouwwen"
+ ],
+ "familie": [
+  "familieen",
+  "familie's"
+ ],
+ "gezin": [
+  "gezins",
+  "gezinen",
+  "geziinen"
+ ],
+ "vader": [
+  "vaderren",
+  "vadeeren"
+ ],
+ "moeder": [
+  "moederren",
+  "moedeeren"
+ ],
+ "broer": [
+  "broeren",
+  "broerren"
+ ],
+ "zus": [
+  "zuss",
+  "zusen",
+  "zuzen"
+ ],
+ "zoon": [
+  "zoonen",
+  "zoonnen"
+ ],
+ "dochter": [
+  "dochteren",
+  "dochterren",
+  "dochteeren"
+ ],
+ "opa": [
+  "opas",
+  "opaen"
+ ],
+ "oma": [
+  "omas",
+  "omaen"
+ ],
+ "oom": [
+  "oomen",
+  "oommen"
+ ],
+ "tante": [
+  "tanteen",
+  "tante's"
+ ],
+ "neef": [
+  "neefs",
+  "neefen",
+  "neeffen"
+ ],
+ "nicht": [
+  "nichts",
+  "nichtten"
+ ],
+ "kat": [
+  "kats",
+  "katen",
+  "kaaten"
+ ],
+ "sap": [
+  "saps",
+  "sapen",
+  "saapen"
+ ],
+ "bier": [
+  "biers",
+  "bierren"
+ ],
+ "wijn": [
+  "wijns",
+  "wijnnen"
+ ],
+ "brood": [
+  "broods",
+  "brooden",
+  "broodden"
+ ],
+ "kaas": [
+  "kaass",
+  "kaasen",
+  "kaassen"
+ ],
+ "ei": [
+  "eien",
+  "ei's"
+ ],
+ "appel": [
+  "appellen",
+  "appeelen"
+ ],
+ "banaan": [
+  "banaans",
+  "banaanen",
+  "banaannen"
+ ],
+ "sinaasappel": [
+  "sinaasappellen",
+  "sinaasappeelen"
+ ],
+ "boterham": [
+  "boterhams",
+  "boterhamen",
+  "boterhaamen"
+ ],
+ "vis": [
+  "viss",
+  "visen",
+  "vizen"
+ ],
+ "groente": [
+  "groenteen",
+  "groente's"
+ ],
+ "aardappel": [
+  "aardappellen",
+  "aardappeelen"
+ ],
+ "jaar": [
+  "jaars",
+  "jaaren",
+  "jaarren"
+ ],
+ "nummer": [
+  "nummerren",
+  "nummeeren"
+ ],
+ "euro": [
+  "euros",
+  "euroen"
+ ],
+ "boek": [
+  "boeks",
+  "boekken"
+ ],
+ "krant": [
+  "krants",
+  "krantten"
+ ],
+ "brief": [
+  "briefs",
+  "brieffen"
+ ],
+ "school": [
+  "schoolen",
+  "schoollen"
+ ],
+ "huis": [
+  "huiss",
+  "huisen",
+  "huissen"
+ ],
+ "kleur": [
+  "kleurs",
+  "kleurren"
+ ],
+ "auto": [
+  "autos",
+  "autoen"
+ ],
+ "fiets": [
+  "fietss",
+  "fietssen",
+  "fietzen"
+ ],
+ "tas": [
+  "tass",
+  "tasen",
+  "tazen"
+ ],
+ "bloem": [
+  "bloems",
+  "bloemmen"
+ ],
+ "jas": [
+  "jass",
+  "jasen",
+  "jazen"
+ ],
+ "stoel": [
+  "stoels",
+  "stoellen"
+ ],
+ "tafel": [
+  "tafellen",
+  "tafeelen"
+ ],
+ "probleem": [
+  "probleems",
+  "probleemen",
+  "probleemmen"
+ ],
+ "vraag": [
+  "vraags",
+  "vraagen",
+  "vraaggen"
+ ],
+ "antwoord": [
+  "antwoords",
+  "antworden"
+ ],
+ "bed": [
+  "beds",
+  "beeden"
+ ],
+ "boom": [
+  "booms",
+  "boommen"
+ ],
+ "deur": [
+  "deurs",
+  "deurren"
+ ],
+ "raam": [
+  "raams",
+  "raamen",
+  "raammen"
+ ],
+ "kamer": [
+  "kameren",
+  "kamerren",
+  "kameeren"
+ ],
+ "glas": [
+  "glass",
+  "glasen",
+  "glassen"
+ ],
+ "stad": [
+  "staden",
+  "stadden",
+  "staaden"
+ ],
+ "schip": [
+  "schips",
+  "schipen",
+  "schippen"
+ ],
+ "koe": [
+  "koeen",
+  "koe's"
+ ],
+ "foto": [
+  "fotos",
+  "fotoen"
+ ],
+ "taal": [
+  "taals",
+  "taalen",
+  "taallen"
+ ],
+ "dier": [
+  "diers",
+  "dierren"
+ ],
+ "vogel": [
+  "vogellen",
+  "vogeelen"
+ ],
+ "paard": [
+  "paards",
+  "paardden",
+  "parden"
+ ],
+ "sleutel": [
+  "sleutellen",
+  "sleuteelen"
+ ],
+ "week": [
+  "weeken",
+  "weekken"
+ ],
+ "dag": [
+  "dags",
+  "daagen"
+ ]
+}

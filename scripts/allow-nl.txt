@@ -1,0 +1,2 @@
+# Dutch words the Hunspell dictionary does not know but that are correct.
+# One per line; checked case-insensitively.
