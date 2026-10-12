@@ -118,7 +118,8 @@ export function A(nl: string, de: string, infl: string, o: Opts = {}): WordSpec 
   const p = infl.split(/\s+/);
   if (p.length !== 3) throw new Error(`Adjective ${nl}: need "inflected comparative superlative"`);
   const [i, c, s] = p.map((x) => (x === '-' ? null : x));
-  const forms = [nl, i, c, c ? c + 'e' : null, s, s ? s + 'e' : null].filter((x): x is string => !!x);
+  // Superlatives are often inflected (de beste); inflected comparatives are rare and left out.
+  const forms = [nl, i, c, s, s ? s + 'e' : null].filter((x): x is string => !!x);
   return {
     id: o.id ?? nl,
     nl,

@@ -50,7 +50,7 @@ for (const s of course) {
   germanProse.push({ text: s.description, where: `${s.id} description`, sentence: false });
 }
 for (const u of units) {
-  german.push({ text: u.title, where: `${u.id} title`, sentence: false });
+  germanProse.push({ text: u.title, where: `${u.id} title`, sentence: false });
   germanProse.push({ text: u.description, where: `${u.id} description`, sentence: false });
   for (const s of u.sentences) {
     s.nl.forEach((t, i) => dutch.push({ text: t, where: `${s.id} nl[${i}]`, sentence: true }));
@@ -238,6 +238,7 @@ for (const v of verbs) {
 const LINT_IGNORE = new Set([
   'Waar doet het pijn?', // "het" is the subject, "pijn doen" a fixed expression
   'Bitterballen zijn typisch Nederlands.', // "zijn" is the verb here, not the possessive
+  'Als het mooi weer is, gaan we naar het strand.', // "het" is the subject (het is mooi weer)
 ]);
 const lintSeen = new Set<string>(LINT_IGNORE);
 for (const d of dutch.filter((x) => x.sentence)) {
@@ -306,7 +307,7 @@ function checkShape(t: Text, lang: 'nl' | 'de') {
   if (!t.sentence) return;
   const first = t.text.replace(/^'[stn] /, '').match(/\p{L}/u)?.[0];
   if (first && first !== first.toLocaleUpperCase(lang)) err(`Großbuchstabe am Satzanfang fehlt: "${t.text}" (${t.where})`);
-  if (!/[.!?…]["”]?$/.test(t.text)) err(`Satzzeichen am Ende fehlt: "${t.text}" (${t.where})`);
+  if (!/[.!?…]["”“]?$/.test(t.text)) err(`Satzzeichen am Ende fehlt: "${t.text}" (${t.where})`);
 }
 dutch.forEach((t) => checkShape(t, 'nl'));
 german.forEach((t) => checkShape(t, 'de'));

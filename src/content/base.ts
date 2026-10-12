@@ -21,6 +21,7 @@ export const BASE_WORDS: WordSpec[] = [
   W('heen', 'hin', 'adv', { core: false }),
   W('dank', 'Dank (in: dank je)', 'interj', { core: false }),
   W('wauw', 'wow', 'interj', { core: false }),
+  W('ah', 'ah', 'interj', { core: false }),
   ...numberWords(),
 ];
 
