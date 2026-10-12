@@ -1,0 +1,16 @@
+{
+  "name": "Taalfiets – Niederländisch lernen",
+  "short_name": "Taalfiets",
+  "description": "Niederländisch lernen auf Deutsch: 50 Kapitel von A1 bis Einstieg B1.",
+  "lang": "de",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f6f8fb",
+  "theme_color": "#c2410c",
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "icons/maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
