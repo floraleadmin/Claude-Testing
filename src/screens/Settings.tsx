@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { DEFAULT_SETTINGS, migrate } from '../lib/progress';
 import { dutchVoices, inArtifactFrame, onVoicesChanged, recognitionSupported, ttsSupported } from '../lib/speech';
 import { isCloud } from '../lib/storage';
-import { Dialog, Switch } from '../components/common';
+import { Dialog, Switch, useDutchAudio, VoiceHelpList } from '../components/common';
 import { useApp } from '../state';
 
 const GOALS = [
@@ -22,6 +22,7 @@ export function Settings() {
   const s = progress.settings;
   const set = (patch: Partial<typeof s>) => dispatch({ type: 'settings', s: patch });
   const [voices, setVoices] = useState(dutchVoices());
+  const audio = useDutchAudio();
   const [confirmReset, setConfirmReset] = useState(false);
   const [message, setMessage] = useState('');
   const [importText, setImportText] = useState('');
@@ -90,9 +91,25 @@ export function Settings() {
         <Row label="Soundeffekte" hint="Töne bei richtig und falsch">
           <Switch checked={s.sound} onChange={(v) => set({ sound: v })} label="Soundeffekte" />
         </Row>
-        <Row label="Audio und Höraufgaben" hint={ttsSupported() ? (voices.length ? `${voices.length} niederländische Stimme(n) gefunden` : 'Keine niederländische Stimme gefunden – die Aussprache kann falsch klingen.') : 'Dein Browser kann nicht vorlesen.'}>
+        <Row
+          label="Audio und Höraufgaben"
+          hint={
+            !ttsSupported()
+              ? 'Dein Browser kann nicht vorlesen.'
+              : voices.length
+                ? `${voices.length} niederländische Stimme(n) gefunden`
+                : audio === 'none'
+                  ? 'Keine niederländische Stimme gefunden – Taalfiets liest nichts vor und lässt Höraufgaben aus.'
+                  : 'Stimmen werden geladen …'
+          }
+        >
           <Switch checked={s.listen} onChange={(v) => set({ listen: v })} label="Audio und Höraufgaben" />
         </Row>
+        {s.listen && audio === 'none' && (
+          <div className="settings-row" style={{ display: 'block' }}>
+            <VoiceHelpList />
+          </div>
+        )}
         {s.listen && (
           <>
             <Row label="Automatisch vorlesen" hint="Niederländische Sätze beim Erscheinen abspielen">

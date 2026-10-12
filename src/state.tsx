@@ -37,7 +37,8 @@ function reducer(p: Progress, a: Action): Progress {
 interface Ctx {
   progress: Progress;
   dispatch: (a: Action) => void;
-  say: (text: string, slow?: boolean) => void;
+  /** False when nothing could be read aloud (audio off or no Dutch voice). */
+  say: (text: string, slow?: boolean) => boolean;
   play: (s: keyof typeof sounds) => void;
 }
 
@@ -73,8 +74,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
 
   const say = useCallback((text: string, slow = false) => {
     const s = ref.current.settings;
-    if (!s.listen) return;
-    speak(text, { rate: s.rate, voiceURI: s.voiceURI, slow });
+    if (!s.listen) return false;
+    return speak(text, { rate: s.rate, voiceURI: s.voiceURI, slow });
   }, []);
   const play = useCallback((name: keyof typeof sounds) => {
     if (ref.current.settings.sound) sounds[name]();

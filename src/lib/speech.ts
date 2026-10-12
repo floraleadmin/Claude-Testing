@@ -36,13 +36,35 @@ function score(v: SpeechSynthesisVoice): number {
   return s;
 }
 
+/**
+ * 'none' once the browser has listed its voices and none is Dutch (or it
+ * cannot speak at all). A German voice reading Dutch would teach a wrong
+ * pronunciation, so the app stays silent then and explains how to add a voice.
+ */
+export function dutchAudio(): 'ok' | 'none' | 'unknown' {
+  if (typeof window === 'undefined') return 'unknown';
+  if (!ttsSupported()) return 'none';
+  if (dutchVoices().length) return 'ok';
+  return voices.length ? 'none' : 'unknown';
+}
+
+/** Where a learner gets a Dutch voice, per system. */
+export const VOICE_HELP = [
+  'Chrome und Edge bringen niederländische Stimmen mit – am einfachsten öffnest du Taalfiets dort.',
+  'Windows: Einstellungen → Zeit und Sprache → Sprache und Region → Sprache hinzufügen → Nederlands, dabei „Sprachausgabe“ anhaken.',
+  'iPhone, iPad, Mac: Bedienungshilfen → Gesprochene Inhalte → Stimmen → Niederländisch.',
+  'Android: Einstellungen → Sprachausgabe (Text-in-Sprache) → Google-Sprachausgabe → Sprachdaten für Niederländisch installieren.',
+  'Danach die Seite neu laden.',
+];
+
 export function pickVoice(uri: string | null): SpeechSynthesisVoice | null {
   const list = dutchVoices();
   return list.find((v) => v.voiceURI === uri) ?? list[0] ?? null;
 }
 
-export function speak(text: string, opts: { rate: number; voiceURI: string | null; slow?: boolean }): void {
-  if (!ttsSupported()) return;
+/** Reads Dutch text aloud; false when no Dutch voice exists (nothing is spoken). */
+export function speak(text: string, opts: { rate: number; voiceURI: string | null; slow?: boolean }): boolean {
+  if (!ttsSupported() || dutchAudio() === 'none') return false;
   speechSynthesis.cancel();
   // "de/het wifi" in a label is read with one article.
   const u = new SpeechSynthesisUtterance(text.replace(/\bde\/het\b/g, 'de'));
@@ -54,6 +76,7 @@ export function speak(text: string, opts: { rate: number; voiceURI: string | nul
   }
   u.rate = opts.slow ? Math.max(0.45, opts.rate * 0.6) : opts.rate;
   speechSynthesis.speak(u);
+  return true;
 }
 
 export function stopSpeaking(): void {

@@ -1,9 +1,10 @@
 // Small shared building blocks.
 import { useEffect, useId, useRef, useState, type ReactNode } from 'react';
-import { Snail, Volume2 } from 'lucide-react';
+import { Snail, Volume2, VolumeX } from 'lucide-react';
 import { hintsAt, reverseHints } from '../lib/lexicon';
 import { lexicon } from '../content/course';
 import { tokenize } from '../lib/text';
+import { dutchAudio, onVoicesChanged, VOICE_HELP } from '../lib/speech';
 import { useApp } from '../state';
 
 /** The app mark: a bicycle carrying a tulip. Drawn for this app. */
@@ -30,7 +31,18 @@ export function ProgressBar({ value, max, variant = '', label }: { value: number
 
 export function SpeakButtons({ text, size = '', slowToo = true }: { text: string; size?: string; slowToo?: boolean }) {
   const { say, progress } = useApp();
+  const audio = useDutchAudio();
+  const [help, setHelp] = useState(false);
   if (!progress.settings.listen) return null;
+  if (audio === 'none')
+    return (
+      <>
+        <button type="button" className={`speak-btn muted-speak ${size}`} onClick={() => setHelp(true)} aria-label="Keine niederländische Stimme – Hilfe">
+          <VolumeX size={size === 'small' ? 20 : 26} />
+        </button>
+        {help && <VoiceHelpDialog onClose={() => setHelp(false)} />}
+      </>
+    );
   return (
     <>
       <button type="button" className={`speak-btn ${size}`} onClick={() => say(text)} aria-label="Vorlesen">
@@ -42,6 +54,39 @@ export function SpeakButtons({ text, size = '', slowToo = true }: { text: string
         </button>
       )}
     </>
+  );
+}
+
+/** Re-renders when the browser's voice list arrives. */
+export function useDutchAudio() {
+  const [state, setState] = useState(dutchAudio());
+  useEffect(() => onVoicesChanged(() => setState(dutchAudio())), []);
+  return state;
+}
+
+export function VoiceHelpList() {
+  return (
+    <ul className="voice-help">
+      {VOICE_HELP.map((t) => (
+        <li key={t}>{t}</li>
+      ))}
+    </ul>
+  );
+}
+
+export function VoiceHelpDialog({ onClose }: { onClose: () => void }) {
+  return (
+    <Dialog
+      title="Keine niederländische Stimme"
+      actions={
+        <button className="btn" onClick={onClose}>
+          Verstanden
+        </button>
+      }
+    >
+      <p className="muted">Dein Browser hat keine niederländische Stimme. Taalfiets liest dann nichts vor, damit du keine falsche Aussprache lernst. Höraufgaben werden so lange ausgelassen.</p>
+      <VoiceHelpList />
+    </Dialog>
   );
 }
 

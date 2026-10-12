@@ -1,6 +1,7 @@
 // Plays real lessons end to end. The app exposes the current exercise with ?e2e
 // so the test can answer every exercise type correctly.
 import { expect, test, type Page } from '@playwright/test';
+import AxeBuilder from '@axe-core/playwright';
 
 type Ex = Record<string, any>;
 
@@ -38,7 +39,12 @@ async function solve(page: Page, ex: Ex) {
     case 'build': {
       const target = ex.listen ? ex.sentence.nl[0] : ex.dir === 'nl-de' ? ex.sentence.de[0] : ex.sentence.nl[0];
       for (const t of tokens(target)) {
-        const tile = page.locator('.bank .tile:not(.used)').filter({ hasText: new RegExp(`^${t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}$`, 'i') }).first();
+        const tile = page
+          .locator('.bank .tile:not(.used)')
+          .filter({
+            hasText: new RegExp(`^${t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}$`, 'i'),
+          })
+          .first();
         await tile.click();
       }
       return;
@@ -85,6 +91,7 @@ test('first lesson: onboarding, all exercises, XP and the next lesson unlocks', 
   await page.getByRole('button', { name: /Starten/ }).click();
   await playSession(page);
   await expect(page.getByText('XP', { exact: true })).toBeVisible();
+  expect(await a11y(page, 'Ergebnis')).toEqual([]);
   await page.getByRole('button', { name: 'Weiter' }).click();
   await expect(page.getByRole('button', { name: /Hallo!, Lektion 1 von \d+, erledigt/ })).toBeVisible();
   await expect(page.getByRole('button', { name: /Hallo!, Lektion 2 von \d+$/ })).toBeVisible();
@@ -104,6 +111,7 @@ async function playChapter(page: Page, title: string): Promise<Set<string>> {
     await node.click();
     await page.locator('.popover .btn').click();
     if (name.includes('Geschichte')) {
+      if (title === 'Hallo!') expect(await a11y(page, 'Geschichte')).toEqual([]);
       for (let k = 0; k < 40; k++) {
         if (await page.getByRole('heading', { name: 'Geschichte gelesen!' }).isVisible()) break;
         const q = page.locator('.card.fade-in .choices').last();
@@ -172,22 +180,64 @@ test('a wrong answer comes back and counts as a mistake to practise', async ({ p
   await expect(page.getByRole('button', { name: /Fehler wiederholen/ })).toBeDisabled();
 });
 
-test('main screens open without errors', async ({ page }) => {
-  const errors: string[] = [];
-  page.on('pageerror', (e) => errors.push(String(e)));
-  await page.goto('/?e2e');
-  await page.getByRole('button', { name: 'Ganz von vorn beginnen' }).click();
-  for (const name of ['Üben', 'Wörter', 'Profil']) {
-    await page.getByRole('button', { name, exact: true }).first().click();
-    await expect(page.getByRole('heading', { name, exact: true })).toBeVisible();
-  }
-  await page.getByRole('button', { name: /^(Einstellungen|Optionen)$/ }).first().click();
-  await expect(page.getByRole('heading', { name: 'Einstellungen' })).toBeVisible();
-  await page.getByRole('button', { name: /^(Lernen)$/ }).first().click();
-  await page.getByRole('button', { name: /Grammatik und Wörter: Hallo!/ }).click();
-  await expect(page.getByRole('heading', { name: 'Hallo!' })).toBeVisible();
-  expect(errors).toEqual([]);
-});
+/** Serious and critical accessibility problems on the current screen (axe-core, WCAG 2.1 AA). */
+async function a11y(page: Page, screen: string) {
+  // Let entry animations finish so colours are measured at rest.
+  await page.waitForTimeout(400);
+  const r = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa']).analyze();
+  return r.violations
+    .filter((v) => v.impact === 'serious' || v.impact === 'critical')
+    .map(
+      (v) =>
+        `${screen}: ${v.id} – ${v.nodes
+          .slice(0, 3)
+          .map((n) => `${n.target.join(' ')} (${n.any[0]?.message ?? ''})`)
+          .join(' | ')}`,
+    );
+}
+
+for (const scheme of ['light', 'dark'] as const)
+  test(`main screens open without errors and pass an accessibility scan (${scheme})`, async ({ page }) => {
+    await page.emulateMedia({ colorScheme: scheme });
+    const errors: string[] = [];
+    const problems: string[] = [];
+    page.on('pageerror', (e) => errors.push(String(e)));
+    await page.goto('/?e2e');
+    problems.push(...(await a11y(page, 'Willkommen')));
+    await page.getByRole('button', { name: 'Ganz von vorn beginnen' }).click();
+    problems.push(...(await a11y(page, 'Lernen')));
+    for (const name of ['Üben', 'Wörter', 'Profil']) {
+      await page.getByRole('button', { name, exact: true }).first().click();
+      await expect(page.getByRole('heading', { name, exact: true })).toBeVisible();
+      problems.push(...(await a11y(page, name)));
+    }
+    await page
+      .getByRole('button', { name: /^(Einstellungen|Optionen)$/ })
+      .first()
+      .click();
+    await expect(page.getByRole('heading', { name: 'Einstellungen' })).toBeVisible();
+    problems.push(...(await a11y(page, 'Einstellungen')));
+    await page
+      .getByRole('button', { name: /^(Lernen)$/ })
+      .first()
+      .click();
+    await page.getByRole('button', { name: /Grammatik und Wörter: Hallo!/ }).click();
+    await expect(page.getByRole('heading', { name: 'Hallo!' })).toBeVisible();
+    problems.push(...(await a11y(page, 'Grammatik')));
+    await page
+      .getByRole('button', { name: /Zurück|Schließen/ })
+      .first()
+      .click();
+    await page.getByRole('button', { name: /Hallo!, Lektion 1 von/ }).click();
+    await page.getByRole('button', { name: /Starten/ }).click();
+    problems.push(...(await a11y(page, 'Übung')));
+    const ex = await currentExercise(page);
+    await solve(page, ex!);
+    if (ex!.type !== 'match') await page.getByRole('button', { name: 'Prüfen' }).click();
+    problems.push(...(await a11y(page, 'Feedback')));
+    expect(errors).toEqual([]);
+    expect(problems).toEqual([]);
+  });
 
 test('placement test into section 5, then its first chapter', async ({ page }) => {
   test.setTimeout(300_000);
@@ -203,4 +253,52 @@ test('placement test into section 5, then its first chapter', async ({ page }) =
   await expect(page.getByRole('button', { name: /Relativsätze, Kapiteltest, erledigt/ })).toBeVisible();
   expect(types.size).toBeGreaterThanOrEqual(5);
   expect(errors).toEqual([]);
+});
+
+test('without a Dutch voice nothing is read aloud and listening tasks are left out', async ({ page }) => {
+  await page.addInitScript(() => {
+    const german = {
+      lang: 'de-DE',
+      name: 'Deutsch',
+      voiceURI: 'de-DE',
+      localService: true,
+      default: true,
+    };
+    Object.defineProperty(speechSynthesis, 'getVoices', {
+      value: () => [german],
+    });
+    (window as any).__spoken = [];
+    Object.defineProperty(speechSynthesis, 'speak', {
+      value: (u: SpeechSynthesisUtterance) => (window as any).__spoken.push(u.text),
+    });
+  });
+  await page.goto('/?e2e');
+  await page.getByRole('button', { name: 'Ganz von vorn beginnen' }).click();
+  await page.getByRole('button', { name: /Hallo!, Lektion 1 von/ }).click();
+  await page.getByRole('button', { name: /Starten/ }).click();
+  for (let step = 0; step < 60; step++) {
+    if (await page.getByRole('heading', { name: /Geschafft!|Fehlerfrei!/ }).isVisible()) break;
+    const ex = await currentExercise(page);
+    expect(ex!.listen ?? false, `${ex!.type} without listening`).toBe(false);
+    await solve(page, ex!);
+    if (ex!.type === 'speak') continue;
+    if (ex!.type !== 'match') await page.getByRole('button', { name: 'Prüfen' }).click();
+    await page.getByRole('button', { name: 'Weiter' }).click();
+  }
+  expect(await page.evaluate(() => (window as any).__spoken)).toEqual([]);
+  await page.getByRole('button', { name: 'Weiter' }).click();
+  await page
+    .getByRole('button', { name: /^Wörter$/ })
+    .first()
+    .click();
+  await page.getByRole('button', { name: 'Keine niederländische Stimme – Hilfe' }).first().click();
+  await expect(page.getByRole('dialog', { name: 'Keine niederländische Stimme' })).toBeVisible();
+  await page.getByRole('button', { name: 'Verstanden' }).click();
+  expect(await page.evaluate(() => (window as any).__spoken)).toEqual([]);
+  await page
+    .getByRole('button', { name: /Einstellungen|Optionen/ })
+    .first()
+    .click();
+  await expect(page.getByText(/Keine niederländische Stimme gefunden/)).toBeVisible();
+  await expect(page.getByText(/Windows: Einstellungen/)).toBeVisible();
 });

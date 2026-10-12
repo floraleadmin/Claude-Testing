@@ -23,6 +23,7 @@ import { makeRng, pick, sample, shuffle } from './rng';
 import { dayNumber, dueWords, localDay, type Progress } from './progress';
 import { learnedSentenceIds, reachedUnitIndex, tensesFor } from './unlock';
 import { wordsInText } from './path';
+import { dutchAudio } from './speech';
 
 export type SessionKind = 'lesson' | 'test' | 'practice' | 'jump';
 
@@ -39,7 +40,8 @@ export interface SessionSpec {
 }
 
 function settingsOf(p: Progress): BuildSettings {
-  return { listen: p.settings.listen, speak: p.settings.speak };
+  // Without a Dutch voice listening tasks cannot be heard, so they are left out.
+  return { listen: p.settings.listen && dutchAudio() !== 'none', speak: p.settings.speak };
 }
 
 function seed(p: Progress, id: string): string {
