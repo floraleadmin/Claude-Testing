@@ -1,0 +1,6 @@
+{
+  "name": "Taalfiets",
+  "avoid": ["Duolingo", "Duo", "Lingot", "Lily", "Zari"],
+  "domains": ["duolingo.com", "duolingo.de"],
+  "colors": ["#58cc02", "#89e219", "#1cb0f6", "#ff4b4b", "#ffc800", "#ff9600", "#ce82ff", "#2b70c9", "#58a700"]
+}
