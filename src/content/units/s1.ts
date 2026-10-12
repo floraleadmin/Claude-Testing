@@ -206,6 +206,7 @@ const u02 = unit({
     W('ook', 'auch', 'adv'),
     P('een beetje', 'ein bisschen'),
     P('prettig kennis te maken', 'freut mich, dich kennenzulernen'),
+    N('de naam', 'der Name', 'namen', '📛'),
     N('de meneer', 'der Herr', 'meneren'),
     N('de mevrouw', 'die Frau (Anrede)', 'mevrouwen'),
     W('Duitsland', 'Deutschland', 'name', { emoji: '🇩🇪' }),
@@ -248,6 +249,7 @@ const u02 = unit({
     S('Jij bent Tom.', 'Du bist Tom.'),
     S('Anna is in Zwitserland.', 'Anna ist in der Schweiz.'),
     S('Daan is Nederlander.', 'Daan ist Niederländer.'),
+    S('Mijn naam is Anna.', 'Mein Name ist Anna.'),
   ],
   cloze: [
     C('Ik {ben} Anna.', 'ben|bent|is', 'Ich bin Anna.'),

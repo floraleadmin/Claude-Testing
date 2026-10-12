@@ -1,4 +1,9 @@
 {
+ "naam": [
+  "naams",
+  "naamen",
+  "naammen"
+ ],
  "meneer": [
   "meneers",
   "meneeren",
@@ -342,5 +347,898 @@
  "dag": [
   "dags",
   "daagen"
+ ],
+ "maandag": [
+  "maandaggen",
+  "maandaagen"
+ ],
+ "dinsdag": [
+  "dinsdaggen",
+  "dinsdaagen"
+ ],
+ "woensdag": [
+  "woensdaggen",
+  "woensdaagen"
+ ],
+ "donderdag": [
+  "donderdaggen",
+  "donderdaagen"
+ ],
+ "vrijdag": [
+  "vrijdaggen",
+  "vrijdaagen"
+ ],
+ "zaterdag": [
+  "zaterdaggen",
+  "zaterdaagen"
+ ],
+ "zondag": [
+  "zondaggen",
+  "zondaagen"
+ ],
+ "middag": [
+  "middaggen",
+  "middaagen"
+ ],
+ "les": [
+  "less",
+  "lesen",
+  "leesen"
+ ],
+ "uur": [
+  "uurs",
+  "uuren",
+  "uurren"
+ ],
+ "minuut": [
+  "minuuts",
+  "minuuten",
+  "minuutten"
+ ],
+ "seconde": [
+  "secondeen",
+  "seconde's"
+ ],
+ "klok": [
+  "kloks",
+  "kloken",
+  "klooken"
+ ],
+ "horloge": [
+  "horlogeen",
+  "horloge's"
+ ],
+ "maand": [
+  "maands",
+  "maandden"
+ ],
+ "lente": [
+  "lenteen",
+  "lente's"
+ ],
+ "zomer": [
+  "zomerren",
+  "zomeeren"
+ ],
+ "winter": [
+  "winterren",
+  "winteeren"
+ ],
+ "verjaardag": [
+  "verjaardags",
+  "verjaardaggen",
+  "verjaardaagen"
+ ],
+ "keuken": [
+  "keukenen",
+  "keukennen",
+  "keukeenen"
+ ],
+ "badkamer": [
+  "badkameren",
+  "badkamerren",
+  "badkameeren"
+ ],
+ "slaapkamer": [
+  "slaapkameren",
+  "slaapkamerren",
+  "slaapkameeren"
+ ],
+ "woonkamer": [
+  "woonkameren",
+  "woonkamerren",
+  "woonkameeren"
+ ],
+ "tuin": [
+  "tuins",
+  "tuinnen"
+ ],
+ "muur": [
+  "muurs",
+  "muuren",
+  "muurren"
+ ],
+ "vloer": [
+  "vloers",
+  "vloerren"
+ ],
+ "bank": [
+  "banks",
+  "bankken"
+ ],
+ "lamp": [
+  "lamps",
+  "lamppen"
+ ],
+ "kast": [
+  "kasts",
+  "kastten"
+ ],
+ "dak": [
+  "daks",
+  "dakken",
+  "daaken"
+ ],
+ "trap": [
+  "traps",
+  "trapen",
+  "traapen"
+ ],
+ "wc": [
+  "wcs",
+  "wcen",
+  "wccen"
+ ],
+ "appartement": [
+  "appartements",
+  "appartementten"
+ ],
+ "koelkast": [
+  "koelkasts",
+  "koelkastten"
+ ],
+ "spiegel": [
+  "spiegellen",
+  "spiegeelen"
+ ],
+ "televisie": [
+  "televisieen",
+  "televisie's"
+ ],
+ "broek": [
+  "broeks",
+  "broekken"
+ ],
+ "overhemd": [
+  "overhemds",
+  "overhemdden"
+ ],
+ "trui": [
+  "truis",
+  "trui's"
+ ],
+ "T-shirt": [
+  "T-shirten",
+  "T-shirtten"
+ ],
+ "jurk": [
+  "jurks",
+  "jurkken"
+ ],
+ "rok": [
+  "roks",
+  "rooken"
+ ],
+ "schoen": [
+  "schoens",
+  "schoennen"
+ ],
+ "sok": [
+  "soks",
+  "soken",
+  "sooken"
+ ],
+ "muts": [
+  "mutss",
+  "mutssen",
+  "mutzen"
+ ],
+ "sjaal": [
+  "sjaalen",
+  "sjaallen",
+  "sjalen"
+ ],
+ "handschoen": [
+  "handschoens",
+  "handschoennen"
+ ],
+ "bril": [
+  "brils",
+  "brilen",
+  "briilen"
+ ],
+ "laars": [
+  "laarss",
+  "laarsen",
+  "laarssen"
+ ],
+ "riem": [
+  "riems",
+  "riemmen"
+ ],
+ "maat": [
+  "maaten",
+  "maatten"
+ ],
+ "winkel": [
+  "winkellen",
+  "winkeelen"
+ ],
+ "supermarkt": [
+  "supermarkts",
+  "supermarktten"
+ ],
+ "bakker": [
+  "bakkeren",
+  "bakkerren",
+  "bakkeeren"
+ ],
+ "slager": [
+  "slageren",
+  "slagerren",
+  "slageeren"
+ ],
+ "kassa": [
+  "kassas",
+  "kassaen"
+ ],
+ "prijs": [
+  "prijss",
+  "prijsen",
+  "prijssen"
+ ],
+ "zak": [
+  "zaks",
+  "zaaken"
+ ],
+ "kilo": [
+  "kilos",
+  "kiloen"
+ ],
+ "liter": [
+  "literen",
+  "literren",
+  "liteeren"
+ ],
+ "telefoonnummer": [
+  "telefoonnummeren",
+  "telefoonnummerren",
+  "telefoonnummeeren"
+ ],
+ "adres": [
+  "adress",
+  "adresen",
+  "adrezen"
+ ],
+ "straat": [
+  "straats",
+  "straaten",
+  "straatten"
+ ],
+ "huisnummer": [
+  "huisnummeren",
+  "huisnummerren",
+  "huisnummeeren"
+ ],
+ "postcode": [
+  "postcodeen",
+  "postcode's"
+ ],
+ "getal": [
+  "getals",
+  "getalen",
+  "getaalen"
+ ],
+ "verdieping": [
+  "verdiepings",
+  "verdiepinggen"
+ ],
+ "inwoner": [
+  "inwoneren",
+  "inwonerren",
+  "inwoneeren"
+ ],
+ "station": [
+  "stationen",
+  "stationnen"
+ ],
+ "museum": [
+  "museumen",
+  "museummen"
+ ],
+ "park": [
+  "parks",
+  "parkken"
+ ],
+ "brug": [
+  "brugs",
+  "brugen",
+  "bruugen"
+ ],
+ "gracht": [
+  "grachts",
+  "grachtten"
+ ],
+ "plein": [
+  "pleins",
+  "pleinnen"
+ ],
+ "centrum": [
+  "centrumen",
+  "centrummen",
+  "centruumen"
+ ],
+ "bibliotheek": [
+  "bibliotheeks",
+  "bibliotheeken",
+  "bibliotheekken"
+ ],
+ "ziekenhuis": [
+  "ziekenhuiss",
+  "ziekenhuisen",
+  "ziekenhuissen"
+ ],
+ "postkantoor": [
+  "postkantoors",
+  "postkantooren",
+  "postkantoorren"
+ ],
+ "hotel": [
+  "hotelen",
+  "hotellen",
+  "hoteelen"
+ ],
+ "restaurant": [
+  "restauranten",
+  "restaurantten"
+ ],
+ "café": [
+  "caféen",
+  "cafééen"
+ ],
+ "weg": [
+  "wegs",
+  "weegen"
+ ],
+ "kruispunt": [
+  "kruispunts",
+  "kruispuntten"
+ ],
+ "stoplicht": [
+  "stoplichts",
+  "stoplichtten"
+ ],
+ "buurt": [
+  "buurts",
+  "burten"
+ ],
+ "bank-geld": [
+  "banks",
+  "bankken"
+ ],
+ "trein": [
+  "treins",
+  "treinnen"
+ ],
+ "bus": [
+  "buss",
+  "busen",
+  "buzen"
+ ],
+ "tram": [
+  "tramen",
+  "traamen"
+ ],
+ "metro": [
+  "metros",
+  "metroen"
+ ],
+ "vliegtuig": [
+  "vliegtuigs",
+  "vliegtuiggen"
+ ],
+ "taxi": [
+  "taxis",
+  "taxien"
+ ],
+ "kaartje": [
+  "kaartjeen",
+  "kaartje's"
+ ],
+ "halte": [
+  "halteen",
+  "halte's"
+ ],
+ "perron": [
+  "perronen",
+  "perronnen",
+  "perroonen"
+ ],
+ "spoor": [
+  "spoors",
+  "spooren",
+  "spoorren"
+ ],
+ "vertraging": [
+  "vertragings",
+  "vertraginggen"
+ ],
+ "reis": [
+  "reiss",
+  "reisen",
+  "reissen"
+ ],
+ "vliegveld": [
+  "vliegvelds",
+  "vliegveldden"
+ ],
+ "bioscoop": [
+  "bioscoops",
+  "bioscoopen",
+  "bioscooppen"
+ ],
+ "spel": [
+  "spels",
+  "speelen"
+ ],
+ "gitaar": [
+  "gitaars",
+  "gitaaren",
+  "gitaarren"
+ ],
+ "piano": [
+  "pianos",
+  "pianoen"
+ ],
+ "instrument": [
+  "instruments",
+  "instrumentten"
+ ],
+ "hobby": [
+  "hobbys",
+  "hobbyyen"
+ ],
+ "lied": [
+  "lieds",
+  "liedden"
+ ],
+ "concert": [
+  "concerts",
+  "concertten"
+ ],
+ "zon": [
+  "zons",
+  "zoonen"
+ ],
+ "wind": [
+  "winds",
+  "windden"
+ ],
+ "wolk": [
+  "wolks",
+  "wolkken"
+ ],
+ "storm": [
+  "storms",
+  "stormmen"
+ ],
+ "graad": [
+  "graads",
+  "graaden",
+  "graadden"
+ ],
+ "paraplu": [
+  "paraplus",
+  "parapluen"
+ ],
+ "temperatuur": [
+  "temperatuurs",
+  "temperatuuren",
+  "temperatuurren"
+ ],
+ "weersvoorspelling": [
+  "weersvoorspellings",
+  "weersvoorspellinggen"
+ ],
+ "rijbewijs": [
+  "rijbewijss",
+  "rijbewijsen",
+  "rijbewijssen"
+ ],
+ "parkeerplaats": [
+  "parkeerplaatss",
+  "parkeerplaatssen",
+  "parkeerplaatzen"
+ ],
+ "ontbijt": [
+  "ontbijts",
+  "ontbijtten"
+ ],
+ "lunch": [
+  "lunchs",
+  "lunchhen"
+ ],
+ "douche": [
+  "doucheen",
+  "douche's"
+ ],
+ "hoofd": [
+  "hoofds",
+  "hoofdden",
+  "hofden"
+ ],
+ "arm": [
+  "arms",
+  "armmen"
+ ],
+ "been": [
+  "beens",
+  "beenen",
+  "beennen"
+ ],
+ "voet": [
+  "voets",
+  "voetten"
+ ],
+ "oog": [
+  "oogs",
+  "oogen",
+  "ooggen"
+ ],
+ "oor": [
+  "oors",
+  "ooren",
+  "oorren"
+ ],
+ "neus": [
+  "neuss",
+  "neusen",
+  "neussen"
+ ],
+ "buik": [
+  "buiks",
+  "buikken"
+ ],
+ "rug": [
+  "rugs",
+  "rugen",
+  "ruugen"
+ ],
+ "keel": [
+  "keels",
+  "keelen",
+  "keellen"
+ ],
+ "haar-noun": [
+  "haaren",
+  "haarren"
+ ],
+ "vinger": [
+  "vingerren",
+  "vingeeren"
+ ],
+ "pijn": [
+  "pijns",
+  "pijnnen"
+ ],
+ "dokter": [
+  "dokterren",
+  "dokteeren"
+ ],
+ "huisarts": [
+  "huisartss",
+  "huisartssen",
+  "huisartzen"
+ ],
+ "apotheek": [
+  "apotheeks",
+  "apotheeken",
+  "apotheekken"
+ ],
+ "medicijn": [
+  "medicijns",
+  "medicijnnen"
+ ],
+ "pil": [
+  "pilen",
+  "piilen"
+ ],
+ "afspraak": [
+  "afspraaks",
+  "afspraaken",
+  "afspraakken"
+ ],
+ "keer": [
+  "keers",
+  "keeren",
+  "keerren"
+ ],
+ "cadeau": [
+  "cadeauen",
+  "cadeau's"
+ ],
+ "idee": [
+  "idees",
+  "ideeen",
+  "idee's"
+ ],
+ "huisje": [
+  "huisjeen",
+  "huisje's"
+ ],
+ "kopje": [
+  "kopjeen",
+  "kopje's"
+ ],
+ "biertje": [
+  "biertjeen",
+  "biertje's"
+ ],
+ "broodje": [
+  "broodjeen",
+  "broodje's"
+ ],
+ "boekje": [
+  "boekjeen",
+  "boekje's"
+ ],
+ "katje": [
+  "katjeen",
+  "katje's"
+ ],
+ "hondje": [
+  "hondjeen",
+  "hondje's"
+ ],
+ "bloemetje": [
+  "bloemetjeen",
+  "bloemetje's"
+ ],
+ "mannetje": [
+  "mannetjeen",
+  "mannetje's"
+ ],
+ "kindje": [
+  "kindjeen",
+  "kindje's"
+ ],
+ "treintje": [
+  "treintjeen",
+  "treintje's"
+ ],
+ "boompje": [
+  "boompjeen",
+  "boompje's"
+ ],
+ "kamertje": [
+  "kamertjeen",
+  "kamertje's"
+ ],
+ "pakje": [
+  "pakjeen",
+  "pakje's"
+ ],
+ "snoepje": [
+  "snoepjeen",
+  "snoepje's"
+ ],
+ "koekje": [
+  "koekjeen",
+  "koekje's"
+ ],
+ "stukje": [
+  "stukjeen",
+  "stukje's"
+ ],
+ "tasje": [
+  "tasjeen",
+  "tasje's"
+ ],
+ "lepeltje": [
+  "lepeltjeen",
+  "lepeltje's"
+ ],
+ "moment": [
+  "moments",
+  "momentten"
+ ],
+ "klas": [
+  "klass",
+  "klasen",
+  "klaasen"
+ ],
+ "juf": [
+  "jufen",
+  "juven",
+  "juufen"
+ ],
+ "bladzijde": [
+  "bladzijdeen",
+  "bladzijde's"
+ ],
+ "berg": [
+  "bergs",
+  "berggen"
+ ],
+ "toren": [
+  "torennen",
+  "toreenen"
+ ],
+ "rivier": [
+  "riviers",
+  "rivierren"
+ ],
+ "zee": [
+  "zees",
+  "zeeen",
+  "zee's"
+ ],
+ "oefening": [
+  "oefenings",
+  "oefeninggen"
+ ],
+ "kilometer": [
+  "kilometeren",
+  "kilometerren",
+  "kilometeeren"
+ ],
+ "ober": [
+  "oberen",
+  "oberren",
+  "obeeren"
+ ],
+ "serveerster": [
+  "serveersteren",
+  "serveersteeren"
+ ],
+ "menukaart": [
+  "menukaarts",
+  "menukaartten",
+  "menukarten"
+ ],
+ "rekening": [
+  "rekenings",
+  "rekeninggen"
+ ],
+ "fooi": [
+  "foois",
+  "fooi's"
+ ],
+ "voorgerecht": [
+  "voorgerechts",
+  "voorgerechtten"
+ ],
+ "nagerecht": [
+  "nagerechts",
+  "nagerechtten"
+ ],
+ "toetje": [
+  "toetjeen",
+  "toetje's"
+ ],
+ "gerecht": [
+  "gerechts",
+  "gerechtten"
+ ],
+ "persoon": [
+  "persoons",
+  "persoonen",
+  "persoonnen"
+ ],
+ "saus": [
+  "sauss",
+  "saussen"
+ ],
+ "salade": [
+  "saladeen",
+  "salade's"
+ ],
+ "kip": [
+  "kips",
+  "kipen",
+  "kiipen"
+ ],
+ "stroopwafel": [
+  "stroopwafellen",
+  "stroopwafeelen"
+ ],
+ "mes": [
+  "mesen",
+  "meesen"
+ ],
+ "vork": [
+  "vorks",
+  "vorkken"
+ ],
+ "lepel": [
+  "lepellen",
+  "lepeelen"
+ ],
+ "bord": [
+  "bords",
+  "bordden"
+ ],
+ "baan": [
+  "baans",
+  "baanen",
+  "baannen"
+ ],
+ "kantoor": [
+  "kantoors",
+  "kantooren",
+  "kantoorren"
+ ],
+ "collega": [
+  "collegas",
+  "collegaen"
+ ],
+ "baas": [
+  "baass",
+  "baasen",
+  "baassen"
+ ],
+ "leraar": [
+  "leraaren",
+  "leraarren"
+ ],
+ "lerares": [
+  "leraress",
+  "leraresen",
+  "lerarezen"
+ ],
+ "arts": [
+  "artss",
+  "artssen",
+  "artzen"
+ ],
+ "verpleegkundige": [
+  "verpleegkundiges",
+  "verpleegkundigeen",
+  "verpleegkundige's"
+ ],
+ "student": [
+  "students",
+  "studentten"
+ ],
+ "politieagent": [
+  "politieagents",
+  "politieagentten"
+ ],
+ "ingenieur": [
+  "ingenieuren",
+  "ingenieurren"
+ ],
+ "vergadering": [
+  "vergaderings",
+  "vergaderinggen"
+ ],
+ "salaris": [
+  "salariss",
+  "salarisen",
+  "salarizen"
+ ],
+ "basisschool": [
+  "basisschools",
+  "basisschoolen",
+  "basisschoollen"
+ ],
+ "examen": [
+  "examenen",
+  "examennen",
+  "exameenen"
+ ],
+ "schepje": [
+  "schepjeen",
+  "schepje's"
  ]
 }

@@ -161,14 +161,21 @@ export function S(nl: string, de: string): Omit<Sentence, 'id' | 'unit'> {
   return { nl: n, de: d };
 }
 
-/** Gap sentence: C('Ik {ben} moe.', 'ben|bent|is', 'Ich bin müde.'). */
+/**
+ * Gap sentence: C('Ik {ben} moe.', 'ben|bent|is', 'Ich bin müde.').
+ * An option starting with "!" is a deliberately misspelled distractor
+ * (the content check makes sure it really is not a Dutch word).
+ */
 export function C(text: string, options: string, de: string): Omit<Cloze, 'id' | 'unit'> {
   const m = /^(.*)\{([^}]+)\}(.*)$/.exec(text);
   if (!m) throw new Error(`Cloze needs one {gap}: ${text}`);
-  const opts = options.split('|').map((x) => x.trim());
+  const raw = options.split('|').map((x) => x.trim());
+  const invalid = raw.filter((x) => x.startsWith('!')).map((x) => x.slice(1));
+  const opts = raw.map((x) => x.replace(/^!/, ''));
   if (!opts.includes(m[2])) throw new Error(`Cloze answer "${m[2]}" missing from options: ${text}`);
+  if (invalid.includes(m[2])) throw new Error(`Cloze answer marked invalid: ${text}`);
   if (new Set(opts).size !== opts.length) throw new Error(`Cloze options repeat: ${text}`);
-  return { before: m[1], after: m[3], answer: m[2], options: opts, de };
+  return { before: m[1], after: m[3], answer: m[2], options: opts, de, invalid };
 }
 
 /** Guidebook tip with example sentences [nl, de]. */

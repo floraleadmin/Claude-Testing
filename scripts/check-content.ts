@@ -41,6 +41,7 @@ interface Text {
   sentence: boolean; // a full sentence: capital + final punctuation expected
 }
 const dutch: Text[] = [];
+const mustBeInvalid = new Map<string, string>();
 const german: Text[] = [];
 const germanProse: Text[] = []; // tips: Dutch inside emphasis is allowed
 
@@ -57,7 +58,10 @@ for (const u of units) {
   }
   for (const c of u.cloze) {
     dutch.push({ text: c.before + c.answer + c.after, where: `${c.id}`, sentence: true });
-    for (const o of c.options) dutch.push({ text: c.before + o + c.after, where: `${c.id} option "${o}"`, sentence: false });
+    for (const o of c.options) {
+      if (c.invalid?.includes(o)) mustBeInvalid.set(o, c.id);
+      else dutch.push({ text: c.before + o + c.after, where: `${c.id} option "${o}"`, sentence: false });
+    }
     german.push({ text: c.de, where: `${c.id} de`, sentence: true });
   }
   for (const t of u.tips) {
@@ -83,7 +87,11 @@ for (const u of units) {
     }
   }
 }
-for (const w of words) german.push({ text: w.de, where: `word ${w.id}`, sentence: false });
+for (const w of words) {
+  // Text in parentheses may quote Dutch: "Geburtstag haben (jarig zijn)".
+  german.push({ text: w.de.replace(/\s*\([^)]*\)/g, '').replace(/\s+/g, ' ').trim(), where: `word ${w.id}`, sentence: false });
+  for (const m of w.de.matchAll(/\(([^)]*)\)/g)) germanProse.push({ text: `*${m[1]}*`, where: `word ${w.id}`, sentence: false });
+}
 
 // ---------------------------------------------------------------- 1. coverage
 const isNumber = (t: string) => /^\d+([.,:]\d+)?$/.test(t);
@@ -145,12 +153,15 @@ for (const d of germanProse) {
 
 const spellResult = JSON.parse(
   execFileSync('python3', ['-I', join(here, 'spell.py')], {
-    input: JSON.stringify({ nl: [...spellNl.keys()], de: [...spellDe.keys()], either: [...spellEither.keys()] }),
+    input: JSON.stringify({ nl: [...spellNl.keys(), ...mustBeInvalid.keys()], de: [...spellDe.keys()], either: [...spellEither.keys()] }),
     encoding: 'utf8',
     maxBuffer: 64 * 1024 * 1024,
   }),
 ) as { nl: string[]; de: string[]; either: string[] };
+for (const [t, where] of mustBeInvalid)
+  if (!spellResult.nl.includes(t)) err(`Absichtlich falsche Option ist ein echtes Wort: "${t}" (${where})`);
 for (const t of spellResult.nl) {
+  if (mustBeInvalid.has(t)) continue;
   if (spellResult.nl.includes(t) && t !== lower(t) && !spellResult.nl.includes(lower(t)) && spellNl.has(lower(t))) continue;
   err(`Dutch spelling? "${t}" (${spellNl.get(t)})`);
 }
@@ -178,6 +189,7 @@ for (const a of adjs) {
   if (a.adj!.infl) adjInfl.set(lower(a.adj!.infl), a);
 }
 const isAdj = (t: string) => adjBase.has(t) || adjInfl.has(t);
+const COPULA = new Set(['is', 'was', 'wordt', 'werd', 'blijft', 'bleef']);
 const INTENS = new Set(['heel', 'erg', 'zeer', 'te', 'zo', 'nog', 'echt', 'best']);
 const DE_DET = new Set(['de', 'deze', 'onze', 'elke', 'iedere', 'welke']);
 const HET_DET = new Set(['het', 'dit', 'ons', 'elk', 'ieder', 'welk']);
@@ -211,7 +223,6 @@ const ALLOWED: Record<string, Set<string>> = {
   ik: allowedFor('ik'),
   jij: allowedFor('jij'),
   hij: allowedFor('hij'),
-  u: allowedFor('u'),
   wij: allowedFor('pl'),
   we: allowedFor('pl'),
   jullie: allowedFor('pl'),
@@ -223,7 +234,12 @@ for (const v of verbs) {
   for (const x of f.pres.jij) if (!f.pres.ik.includes(x)) jijT.add(x);
 }
 
-const lintSeen = new Set<string>();
+// Sentences where a lint rule misreads the grammar (checked by hand).
+const LINT_IGNORE = new Set([
+  'Waar doet het pijn?', // "het" is the subject, "pijn doen" a fixed expression
+  'Bitterballen zijn typisch Nederlands.', // "zijn" is the verb here, not the possessive
+]);
+const lintSeen = new Set<string>(LINT_IGNORE);
 for (const d of dutch.filter((x) => x.sentence)) {
   if (lintSeen.has(d.text)) continue;
   lintSeen.add(d.text);
@@ -231,6 +247,8 @@ for (const d of dutch.filter((x) => x.sentence)) {
   for (let i = 0; i < toks.length; i++) {
     const det = toks[i];
     if (!DEF_DET.has(det) && !INDEF_DET.has(det) && !DE_DET.has(det) && !HET_DET.has(det)) continue;
+    // "Is het water warm?" vs "Vandaag is het maandag": after a form of zijn/worden "het" may be a pronoun.
+    if (det === 'het' && i > 0 && COPULA.has(toks[i - 1])) continue;
     let j = i + 1;
     const adjsHere: string[] = [];
     while (j < toks.length && (INTENS.has(toks[j]) || (isAdj(toks[j]) && !sgArt.has(toks[j]) && !plural.has(toks[j])))) {
@@ -266,6 +284,8 @@ for (const d of dutch.filter((x) => x.sentence)) {
     const s = toks[i];
     const allowed = ALLOWED[s];
     if (!allowed) continue;
+    // After inversion ("Kan ik pinnen?") the next word is not the finite verb.
+    if (i > 0 && verbForm.has(toks[i - 1])) continue;
     const v = toks[i + 1];
     if (!verbForm.has(v) || nounOrAdjForm.has(v)) continue;
     if (!allowed.has(v)) err(`Verbform "${s} ${v}" passt nicht: ${d.text} (${d.where})`);
@@ -297,7 +317,8 @@ for (const w of words) ids.set(w.id, (ids.get(w.id) ?? 0) + 1);
 for (const [id, n] of ids) if (n > 1) err(`word id "${id}" ${n}× vergeben`);
 
 const coreNlPos = new Map<string, string>();
-for (const w of words.filter((x) => x.core)) {
+for (const w of words.filter((x) => x.core && x.id === x.nl)) {
+  // Homonyms get an explicit id (dag-groet, over-tijd) and are allowed.
   const k = `${w.pos}:${lower(w.nl)}:${w.art ?? ''}`;
   if (coreNlPos.has(k)) err(`"${w.nl}" (${w.pos}) doppelt: ${coreNlPos.get(k)} und ${w.unit}`);
   coreNlPos.set(k, w.unit);

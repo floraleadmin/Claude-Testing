@@ -74,6 +74,8 @@ export interface Cloze {
   /** German translation of the full sentence. */
   de: string;
   unit: string;
+  /** Options that are deliberately misspelled (not real words). */
+  invalid?: string[];
 }
 
 export interface Tip {
