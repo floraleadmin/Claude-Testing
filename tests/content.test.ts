@@ -5,10 +5,12 @@ import { checkText } from '../src/lib/answer';
 import {
   acceptedAnswers,
   allNodes,
+  articleExercise,
   buildExercise,
   buildLesson,
   exerciseFromKey,
   knownDutchForms,
+  nlLabel,
   unitPlan,
   type Exercise,
 } from '../src/lib/exercises';
@@ -81,6 +83,13 @@ describe('course content', () => {
   it('has unique word ids', () => {
     const ids = words.map((w) => w.id);
     expect(ids.length).toBe(new Set(ids).size);
+  });
+
+  it('keeps nouns with two standard articles out of the article drill', () => {
+    const wifi = words.find((w) => w.id === 'wifi')!;
+    expect(wifi.bothArts).toBe(true);
+    expect(nlLabel(wifi)).toBe('de/het wifi');
+    expect(articleExercise(wifi)).toBeNull();
   });
 
   it('gives every Dutch token in sentences a hint', () => {

@@ -68,9 +68,11 @@ export function hintsAt(lex: Lexicon, tokens: string[], i: number): Hint[] {
   return out;
 }
 
+const artOf = (w: Word) => (w.bothArts ? 'de/het' : w.art);
+
 /** Meaning of one entry, with the base form when the token is inflected. */
 function describe(w: Word, token: string): string {
-  const base = w.pos === 'noun' ? `${w.art} ${w.nl}` : w.nl;
+  const base = w.pos === 'noun' ? `${artOf(w)} ${w.nl}` : w.nl;
   if (lower(w.nl) === token) return w.de;
   if (w.pos === 'noun' && w.pl.includes(token)) return `${w.de} (Plural von ${base})`;
   return `${w.de} (${base})`;
@@ -90,7 +92,7 @@ export function reverseHints(lex: Lexicon, deToken: string): string[] {
       .replace(/\([^)]*\)/g, ' ')
       .split(/[^\p{L}'-]+/u);
     if (parts.includes(t)) {
-      const label = w.pos === 'noun' ? `${w.art} ${w.nl}` : w.nl;
+      const label = w.pos === 'noun' ? `${artOf(w)} ${w.nl}` : w.nl;
       if (!out.includes(label)) out.push(label);
     }
     if (out.length >= 4) break;

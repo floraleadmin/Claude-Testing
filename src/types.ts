@@ -40,6 +40,8 @@ export interface Word {
   de: string;
   pos: Pos;
   art?: 'de' | 'het';
+  /** Both articles are standard ("de/het wifi"); such nouns are left out of the article drill. */
+  bothArts?: boolean;
   /** Plural forms, first is the usual one. Empty when the noun has no plural we teach. */
   pl: string[];
   pluralOnly?: boolean;

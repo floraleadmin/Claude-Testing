@@ -178,7 +178,7 @@ for (const n of nouns) {
     continue;
   }
   const k = lower(n.nl);
-  sgArt.set(k, new Set([...(sgArt.get(k) ?? []), n.art!]));
+  sgArt.set(k, new Set([...(sgArt.get(k) ?? []), n.art!, ...(n.bothArts ? ['het'] : [])]));
   n.pl.forEach((p) => plural.add(lower(p)));
 }
 const adjs = words.filter((w) => w.pos === 'adj' && w.adj);

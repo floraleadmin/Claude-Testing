@@ -44,7 +44,8 @@ export function pickVoice(uri: string | null): SpeechSynthesisVoice | null {
 export function speak(text: string, opts: { rate: number; voiceURI: string | null; slow?: boolean }): void {
   if (!ttsSupported()) return;
   speechSynthesis.cancel();
-  const u = new SpeechSynthesisUtterance(text);
+  // "de/het wifi" in a label is read with one article.
+  const u = new SpeechSynthesisUtterance(text.replace(/\bde\/het\b/g, 'de'));
   u.lang = 'nl-NL';
   const v = pickVoice(opts.voiceURI);
   if (v) {

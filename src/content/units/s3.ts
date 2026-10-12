@@ -1,5 +1,5 @@
 // Section 3 – Grammatik im Alltag (A1–A2)
-import { A, C, N, NP, P, Q, S, T, V, W, story, unit } from '../dsl';
+import { A, C, N, P, Q, S, T, V, W, story, unit } from '../dsl';
 
 const u21 = unit({
   id: 'u21',

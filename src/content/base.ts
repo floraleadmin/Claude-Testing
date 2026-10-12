@@ -17,6 +17,12 @@ export const BASE_WORDS: WordSpec[] = [
   name('Keulen', 'Köln'),
   name('Zwolle'),
   name('Lindestraat'),
+  name('Delft'),
+  name('Den Haag'),
+  name('Antwerpen'),
+  name('Mauritshuis'),
+  name('Van Gogh'),
+  name('Johannes Vermeer'),
   // Words used in alternatives only
   W('heen', 'hin', 'adv', { core: false }),
   W('dank', 'Dank (in: dank je)', 'interj', { core: false }),

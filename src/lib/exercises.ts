@@ -229,11 +229,11 @@ export function meaningExercise(w: Word, pool: Word[], dir: Dir, rng: Rng, isNew
 }
 
 export function nlLabel(w: Word): string {
-  return w.pos === 'noun' && !w.pluralOnly ? `${w.art} ${w.nl}` : w.pos === 'noun' ? `de ${w.nl}` : w.nl;
+  return w.pos === 'noun' && !w.pluralOnly ? `${w.bothArts ? 'de/het' : w.art} ${w.nl}` : w.pos === 'noun' ? `de ${w.nl}` : w.nl;
 }
 
 export function articleExercise(w: Word): Exercise | null {
-  if (w.pos !== 'noun' || !w.art || w.pluralOnly) return null;
+  if (w.pos !== 'noun' || !w.art || w.pluralOnly || w.bothArts) return null;
   return { type: 'article', key: `a:${w.id}`, wordIds: [w.id], word: w };
 }
 

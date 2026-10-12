@@ -32,11 +32,12 @@ function extraForms(o?: Opts): string[] {
   return o?.forms ? o.forms.split(/\s+/).filter(Boolean) : [];
 }
 
-/** Noun: N('de appel', 'der Apfel', 'appels/appelen', '🍎'). Plural '-' = none taught. */
+/** Noun: N('de appel', 'der Apfel', 'appels/appelen', '🍎'). Plural '-' = none taught; 'de/het wifi' when both articles are standard. */
 export function N(artNl: string, de: string, pl: string, emoji?: string, o: Opts = {}): WordSpec {
-  const m = /^(de|het) (.+)$/.exec(artNl);
+  const m = /^(de|het|de\/het) (.+)$/.exec(artNl);
   if (!m) throw new Error(`Noun needs "de" or "het": ${artNl}`);
-  const art = m[1] as 'de' | 'het';
+  const bothArts = m[1] === 'de/het';
+  const art = bothArts ? 'de' : (m[1] as 'de' | 'het');
   const nl = m[2];
   const plurals = pl === '-' ? [] : splitAlts(pl);
   return {
@@ -45,6 +46,7 @@ export function N(artNl: string, de: string, pl: string, emoji?: string, o: Opts
     de,
     pos: 'noun',
     art,
+    ...(bothArts ? { bothArts } : {}),
     pl: plurals,
     emoji: emoji || o.emoji,
     note: o.note,

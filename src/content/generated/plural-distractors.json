@@ -1240,5 +1240,468 @@
  "schepje": [
   "schepjeen",
   "schepje's"
+ ],
+ "team": [
+  "teamen",
+  "teammen"
+ ],
+ "woordenboek": [
+  "woordenboeks",
+  "woordenboekken"
+ ],
+ "boerderij": [
+  "boerderijs",
+  "boerderijjen",
+  "boerderiijen"
+ ],
+ "radio": [
+  "radios",
+  "radioen"
+ ],
+ "verhaal": [
+  "verhaals",
+  "verhaalen",
+  "verhaallen"
+ ],
+ "sprookje": [
+  "sprookjeen",
+  "sprookje's"
+ ],
+ "prinses": [
+  "prinsess",
+  "prinsesen",
+  "prinsezen"
+ ],
+ "kasteel": [
+  "kasteels",
+  "kasteelen",
+  "kasteellen"
+ ],
+ "bos": [
+  "bosen",
+  "boosen"
+ ],
+ "wolf": [
+  "wolfs",
+  "wolfen",
+  "wolffen"
+ ],
+ "feest": [
+  "feests",
+  "festen"
+ ],
+ "pannenkoek": [
+  "pannenkoeks",
+  "pannenkoekken"
+ ],
+ "vakantie": [
+  "vakantieen",
+  "vakantie's"
+ ],
+ "koffer": [
+  "kofferren",
+  "koffeeren"
+ ],
+ "paspoort": [
+  "paspoorts",
+  "paspoortten",
+  "pasporten"
+ ],
+ "camping": [
+  "campingen",
+  "campinggen"
+ ],
+ "tent": [
+  "tents",
+  "tentten"
+ ],
+ "toerist": [
+  "toerists",
+  "toeristten"
+ ],
+ "grens": [
+  "grenss",
+  "grensen",
+  "grenssen"
+ ],
+ "zwembad": [
+  "zwembads",
+  "zwembadden",
+  "zwembaaden"
+ ],
+ "uitzicht": [
+  "uitzichts",
+  "uitzichtten"
+ ],
+ "haring": [
+  "harings",
+  "haringgen"
+ ],
+ "gevoel": [
+  "gevoels",
+  "gevoellen"
+ ],
+ "angst": [
+  "angsts",
+  "angstten"
+ ],
+ "zin": [
+  "zinen",
+  "ziinen"
+ ],
+ "toets": [
+  "toetss",
+  "toetssen",
+  "toetzen"
+ ],
+ "plan": [
+  "planen",
+  "plaanen"
+ ],
+ "bruiloft": [
+  "bruilofts",
+  "bruiloftten"
+ ],
+ "gast": [
+  "gasts",
+  "gastten"
+ ],
+ "studie": [
+  "studieen",
+  "studie's"
+ ],
+ "schrijver": [
+  "schrijveren",
+  "schrijverren",
+  "schrijveeren"
+ ],
+ "schilder": [
+  "schilderren",
+  "schildeeren"
+ ],
+ "schilderij": [
+  "schilderijs",
+  "schilderijjen",
+  "schilderiijen"
+ ],
+ "gebouw": [
+  "gebouws",
+  "gebouwwen"
+ ],
+ "parel": [
+  "parellen",
+  "pareelen"
+ ],
+ "keuze": [
+  "keuzeen",
+  "keuze's"
+ ],
+ "wens": [
+  "wenss",
+  "wenssen",
+  "wenzen"
+ ],
+ "loterij": [
+  "loterijs",
+  "loterijjen",
+  "loteriijen"
+ ],
+ "plaats": [
+  "plaatss",
+  "plaatssen",
+  "plaatzen"
+ ],
+ "pakket": [
+  "pakkets",
+  "pakketen",
+  "pakkeeten"
+ ],
+ "dief": [
+  "diefs",
+  "diefen",
+  "dieffen"
+ ],
+ "garage": [
+  "garageen",
+  "garage's"
+ ],
+ "slot": [
+  "slotten",
+  "slooten"
+ ],
+ "woord": [
+  "woords",
+  "woordden"
+ ],
+ "eiland": [
+  "eilands",
+  "eilandden"
+ ],
+ "blad": [
+  "blads",
+  "bladden",
+  "blaaden"
+ ],
+ "vlinder": [
+  "vlinderren",
+  "vlindeeren"
+ ],
+ "bij-dier": [
+  "bijs",
+  "bijjen",
+  "biijen"
+ ],
+ "eend": [
+  "eends",
+  "eendden"
+ ],
+ "konijn": [
+  "konijns",
+  "konijnnen"
+ ],
+ "muis": [
+  "muiss",
+  "muisen",
+  "muissen"
+ ],
+ "schaap": [
+  "schaaps",
+  "schaapen",
+  "schaappen"
+ ],
+ "varken": [
+  "varkenen",
+  "varkennen",
+  "varkeenen"
+ ],
+ "wortel": [
+  "wortellen",
+  "worteelen"
+ ],
+ "dijk": [
+  "dijks",
+  "dijkken"
+ ],
+ "molen": [
+  "molenen",
+  "molennen",
+  "moleenen"
+ ],
+ "deel": [
+  "deelen",
+  "deellen"
+ ],
+ "computer": [
+  "computerren",
+  "computeeren"
+ ],
+ "laptop": [
+  "laptopen",
+  "laptoppen",
+  "laptoopen"
+ ],
+ "telefoon": [
+  "telefoonen",
+  "telefoonnen",
+  "telefonen"
+ ],
+ "website": [
+  "websiteen",
+  "website's"
+ ],
+ "wachtwoord": [
+  "wachtwoords",
+  "wachtwoordden",
+  "wachtworden"
+ ],
+ "scherm": [
+  "scherms",
+  "schermmen"
+ ],
+ "batterij": [
+  "batterijs",
+  "batterijjen",
+  "batteriijen"
+ ],
+ "oplader": [
+  "opladeren",
+  "opladerren",
+  "opladeeren"
+ ],
+ "printer": [
+  "printeren",
+  "printerren",
+  "printeeren"
+ ],
+ "camera": [
+  "cameras",
+  "cameraen"
+ ],
+ "geheugen": [
+  "geheugenen",
+  "geheugennen",
+  "geheugeenen"
+ ],
+ "video": [
+  "videos",
+  "videoen"
+ ],
+ "programma": [
+  "programmas",
+  "programmaen"
+ ],
+ "router": [
+  "routerren",
+  "routeeren"
+ ],
+ "gemeente": [
+  "gemeenteen",
+  "gemeente's"
+ ],
+ "formulier": [
+  "formuliers",
+  "formulierren"
+ ],
+ "identiteitsbewijs": [
+  "identiteitsbewijss",
+  "identiteitsbewijsen",
+  "identiteitsbewijssen"
+ ],
+ "verzekering": [
+  "verzekerings",
+  "verzekeringgen"
+ ],
+ "huur": [
+  "huurs",
+  "huuren",
+  "huurren"
+ ],
+ "contract": [
+  "contracts",
+  "contractten"
+ ],
+ "huurcontract": [
+  "huurcontracts",
+  "huurcontractten"
+ ],
+ "bankrekening": [
+  "bankrekenings",
+  "bankrekeninggen"
+ ],
+ "belasting": [
+  "belastings",
+  "belastinggen"
+ ],
+ "wachtrij": [
+  "wachtrijs",
+  "wachtrijjen",
+  "wachtriijen"
+ ],
+ "loket": [
+  "lokets",
+  "loketen",
+  "lokeeten"
+ ],
+ "ambtenaar": [
+  "ambtenaaren",
+  "ambtenaarren"
+ ],
+ "document": [
+  "documents",
+  "documentten"
+ ],
+ "datum": [
+  "datumen",
+  "datummen",
+  "datuumen"
+ ],
+ "geboortedatum": [
+  "geboortedatumen",
+  "geboortedatummen",
+  "geboortedatuumen"
+ ],
+ "mening": [
+  "menings",
+  "meninggen"
+ ],
+ "voordeel": [
+  "voordeels",
+  "voordeelen",
+  "voordeellen"
+ ],
+ "nadeel": [
+  "nadeels",
+  "nadeelen",
+  "nadeellen"
+ ],
+ "argument": [
+  "arguments",
+  "argumentten"
+ ],
+ "discussie": [
+  "discussieen",
+  "discussie's"
+ ],
+ "koningin": [
+  "koningins",
+  "koninginen",
+  "koningiinen"
+ ],
+ "provincie": [
+  "provincieen",
+  "provincie's"
+ ],
+ "hoofdstad": [
+  "hoofdstaden",
+  "hoofdstadden",
+  "hoofdstaaden"
+ ],
+ "regering": [
+  "regerings",
+  "regeringgen"
+ ],
+ "traditie": [
+  "traditieen",
+  "traditie's"
+ ],
+ "cultuur": [
+  "cultuurs",
+  "cultuuren",
+  "cultuurren"
+ ],
+ "tulp": [
+  "tulps",
+  "tulppen"
+ ],
+ "vrijmarkt": [
+  "vrijmarkts",
+  "vrijmarktten"
+ ],
+ "aap": [
+  "aaps",
+  "aapen",
+  "aappen"
+ ],
+ "mouw": [
+  "mouws",
+  "mouwwen"
+ ],
+ "vlieg": [
+  "vliegs",
+  "vlieggen"
+ ],
+ "klap": [
+  "klaps",
+  "klapen",
+  "klaapen"
+ ],
+ "klontje": [
+  "klontjeen",
+  "klontje's"
+ ],
+ "kater": [
+  "kateren",
+  "katerren",
+  "kateeren"
  ]
 }
