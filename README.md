@@ -55,6 +55,16 @@ stehen, beide Sprachen laufen durch Hunspell (Wörterbücher aus `dictionary-nl`
 `dictionary-de`), dazu Regeln für Artikel, Adjektivendungen, Verbformen und Wortstellung.
 Absichtlich falsche Antwortoptionen dürfen keine echten Wörter sein.
 
+## Website
+
+Die App läuft auf GitHub Pages: **https://floraleadmin.github.io/Claude-Testing/**
+
+Auf dem Handy lässt sie sich über „Zum Startbildschirm hinzufügen“ wie eine App öffnen. Der
+Fortschritt liegt im jeweiligen Browser; mit *Einstellungen → Als Datei sichern* nimmt man ihn auf
+ein anderes Gerät mit.
+
+Aktualisieren: `scripts/deploy-pages.sh` baut die App und ersetzt den Branch `gh-pages`.
+
 ## Als claude.ai-Artifact
 
 ```bash

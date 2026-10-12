@@ -6,3 +6,11 @@ test-results/
 playwright-report/
 *.log
 .DS_Store
+
+# Secrets and local settings never go into the repository.
+.env
+.env.*
+*.local
+*.pem
+*.key
+.claude/settings.local.json
