@@ -219,6 +219,8 @@
           keep.push(p);
         } else if (r.code !== 'dup' && p.a.type === 'act') {
           this.onNotice('Deine letzte Aktion konnte nicht übernommen werden – bitte prüfen.');
+        } else if (r.code !== 'dup' && p.a.type === 'join') {
+          this.onNotice('Beitritt nicht möglich: ' + r.err);
         }
       }
       this.pending = keep;
