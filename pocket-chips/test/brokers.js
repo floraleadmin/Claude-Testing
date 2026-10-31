@@ -11,6 +11,11 @@ const MODS = process.env.NODE_MODULES_DIR;
 const mqtt = require(MODS ? path.join(MODS, 'mqtt') : 'mqtt');
 const src = fs.readFileSync(path.join(__dirname, '..', 'sync.js'), 'utf8');
 const urls = [...src.matchAll(/'(wss:\/\/[^']+)'/g)].map((m) => m[1]);
+// Zusätzliche Kandidaten nur zur Info (zählen nicht für das Ergebnis).
+const extra = (process.env.EXTRA_BROKERS || '')
+  .split(',')
+  .map((x) => x.trim())
+  .filter(Boolean);
 
 function once(client, ev, ms) {
   return new Promise((resolve, reject) => {
@@ -86,5 +91,11 @@ async function check(url) {
   console.table(res);
   const ok = res.filter((r) => r.ok).length;
   console.log(`${ok} von ${res.length} Brokern funktionieren`);
+  if (extra.length) {
+    const ex = [];
+    for (const u of extra) ex.push(await check(u));
+    console.log('Weitere Kandidaten:');
+    console.table(ex);
+  }
   if (ok < 2) process.exit(1);
 })();

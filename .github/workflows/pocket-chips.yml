@@ -34,6 +34,8 @@ jobs:
         run: node pocket-chips/test/e2e-resilience.js
       - name: Öffentliche MQTT-Broker
         run: node pocket-chips/test/brokers.js
+        env:
+          EXTRA_BROKERS: wss://mqtt.eclipseprojects.io:443/mqtt,wss://test.mosquitto.org:8081,wss://test.mosquitto.org:8091/mqtt,wss://broker-cn.emqx.io:8084/mqtt,wss://public:public@public.cloud.shiftr.io:443
       - name: Auf Veröffentlichung warten
         id: wait
         continue-on-error: true
