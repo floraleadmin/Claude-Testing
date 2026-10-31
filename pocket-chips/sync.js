@@ -12,10 +12,12 @@
   'use strict';
   const E = root.PCEngine;
 
+  // Drei unabhängige, kostenlose Broker. shiftr.io läuft über Port 443 und kommt
+  // damit auch durch WLANs, die andere Ports sperren.
   const DEFAULT_BROKERS = [
     'wss://broker.emqx.io:8084/mqtt',
     'wss://broker.hivemq.com:8884/mqtt',
-    'wss://test.mosquitto.org:8081/mqtt',
+    'wss://public:public@public.cloud.shiftr.io:443',
   ];
   const CODE_ABC = 'ABCDEFGHJKMNPQRSTUVWXYZ23456789';
   const TOPIC_PREFIX = 'pocketchips/v1/';

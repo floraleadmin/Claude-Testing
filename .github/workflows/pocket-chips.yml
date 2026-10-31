@@ -35,7 +35,7 @@ jobs:
       - name: Öffentliche MQTT-Broker
         run: node pocket-chips/test/brokers.js
         env:
-          EXTRA_BROKERS: wss://mqtt.eclipseprojects.io:443/mqtt,wss://test.mosquitto.org:8081,wss://test.mosquitto.org:8091/mqtt,wss://broker-cn.emqx.io:8084/mqtt,wss://public:public@public.cloud.shiftr.io:443
+          EXTRA_BROKERS: wss://broker-cn.emqx.io:8084/mqtt
       - name: Auf Veröffentlichung warten
         id: wait
         continue-on-error: true
@@ -45,5 +45,10 @@ jobs:
       - name: Live-Test – echte Seite, echte Broker, drei Handys
         if: steps.wait.outcome == 'success'
         run: node pocket-chips/test/e2e.js
+        env:
+          BASE_URL: ${{ env.LIVE_URL }}
+      - name: Live-Test – jeder Broker einzeln im Browser
+        if: steps.wait.outcome == 'success'
+        run: node pocket-chips/test/broker-browser.js
         env:
           BASE_URL: ${{ env.LIVE_URL }}

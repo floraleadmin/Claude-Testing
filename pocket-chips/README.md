@@ -44,7 +44,7 @@ Zwischen Poker und Blackjack lässt sich jederzeit wechseln (zwischen zwei Runde
 ## Technik
 
 - Statische Seite ohne Build-Schritt: `index.html`, `engine.js` (Spielregeln, rein und deterministisch), `sync.js` (Abgleich), `app.js` (Oberfläche).
-- Abgleich über drei kostenlose öffentliche MQTT-Broker gleichzeitig (EMQX, HiveMQ, Mosquitto). Der ganze Spielstand liegt als *retained* Nachricht mit Versionsnummer auf dem Broker. Jedes Gerät übernimmt immer den höchsten Stand und reicht ihn an Broker weiter, die zurückliegen.
+- Abgleich über drei kostenlose öffentliche MQTT-Broker gleichzeitig (EMQX, HiveMQ, shiftr.io – letzterer über Port 443). Der ganze Spielstand liegt als *retained* Nachricht mit Versionsnummer auf dem Broker. Jedes Gerät übernimmt immer den höchsten Stand und reicht ihn an Broker weiter, die zurückliegen.
 - Es gibt keinen Server, an dem die Partie hängt: Das Handy, das gerade etwas tut, berechnet den neuen Stand. Fällt ein Broker aus, laufen die anderen weiter. Ein Broker, der leer neu startet, bekommt den Tisch von den Handys zurück.
 - Kollidieren zwei Aktionen, gewinnt eine. Die andere wird automatisch erneut angewendet, wenn sie noch passt.
 
