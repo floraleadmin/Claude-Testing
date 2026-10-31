@@ -1,0 +1,47 @@
+name: Pocket Chips
+
+on:
+  push:
+    branches: [claude/pocket-chips-poker-1tqdsh]
+    paths: ['pocket-chips/**', '.github/workflows/pocket-chips.yml']
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      NODE_MODULES_DIR: /tmp/deps/node_modules
+      NODE_PATH: /tmp/deps/node_modules
+      LIVE_URL: https://floraleadmin.github.io/Claude-Testing/pocket-chips/
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Testwerkzeuge installieren
+        run: |
+          mkdir -p /tmp/deps && cd /tmp/deps && npm init -y > /dev/null
+          npm i --no-audit --no-fund aedes@0.51 websocket-stream@5 ws@8 mqtt@5 playwright@1.48.2
+          npx playwright install --with-deps chromium
+      - name: Engine-Tests (Regeln, Side Pots, Fuzz)
+        run: node --test pocket-chips/test/engine.test.js
+      - name: E2E mit drei Handys (lokale Broker)
+        run: node pocket-chips/test/e2e.js
+      - name: Ausfall-Test (offline, Broker-Neustart)
+        run: node pocket-chips/test/e2e-resilience.js
+      - name: Öffentliche MQTT-Broker
+        run: node pocket-chips/test/brokers.js
+      - name: Auf Veröffentlichung warten
+        id: wait
+        continue-on-error: true
+        run: node pocket-chips/test/wait-live.js
+        env:
+          BASE_URL: ${{ env.LIVE_URL }}
+      - name: Live-Test – echte Seite, echte Broker, drei Handys
+        if: steps.wait.outcome == 'success'
+        run: node pocket-chips/test/e2e.js
+        env:
+          BASE_URL: ${{ env.LIVE_URL }}
